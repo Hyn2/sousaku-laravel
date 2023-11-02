@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->char('gender', 1)->nullable();
+            // 추후에 리전 추가
+            $table->string('contact');
+            $table->string('profile_image');
+            $table->string('bio', 50);
             $table->rememberToken();
             $table->timestamps();
         });
