@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'region_id',
+        'contact',
+        'profile_image',
+        'bio',
     ];
 
     /**
@@ -42,4 +47,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function region() {
+        $this->hasOne(Region::class);
+    }
+
+    public function positions() {
+        return $this->belongsToMany(Position::class);
+    }
+
+    public function genres() {
+        return $this->belongsToMany(Genre::class);
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
 }
