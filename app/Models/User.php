@@ -43,6 +43,7 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
@@ -50,6 +51,7 @@ class User extends Authenticatable
 
     public function region() {
         $this->hasOne(Region::class);
+
     }
 
     public function positions() {

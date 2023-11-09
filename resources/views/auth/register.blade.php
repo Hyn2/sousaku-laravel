@@ -9,6 +9,12 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Gender -->
+        <div class="mt-4">
+            <x-input-label for="region_id" :value="__('Region')" />
+            <x-select id="region_id" name="region_id" class="block mt-1 w-full" :value="old('region')" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
