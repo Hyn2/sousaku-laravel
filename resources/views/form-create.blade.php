@@ -9,10 +9,24 @@
 </head>
 <body>
     <x-app-layout>
-        <h1>asdf</h1>
-        <form action="forms." method="post">
+        <div class="flex flex-col basis-7/12 justify-center shadow">
+            <x-input-label for="title" value="TITLE"/>
+            <x-text-input class="w-full" id="title" name="title" type="text" placeholder="TITLE"/>
+            <div class="flex justify-between">
+                <x-input-label for="gender" value="GENDER" />
+                <x-input-label for="region" value="REGION"/>
+                <x-input-label for="position" value="POSITION"/>
+            </div>
+            <div class="flex justify-between">
 
-        </form>
+                <x-select id="gender"></x-select>
+
+                <x-select id="region"></x-select>
+
+                <x-select id="position"></x-select>
+            </div>
+            <x-quill></x-quill>
+        </div>
     </x-app-layout>
 </body>
 </html>

@@ -14,5 +14,10 @@
 
 </head>
 <x-app-layout>
+    <div>
+        <div class="w-1/3 h-2/5 bg-black">
+            <div class="w-full h-[300px] bg-black">asdf</div>
+        </div>
+    </div>
 </x-app-layout>
 </html>

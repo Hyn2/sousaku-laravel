@@ -21,8 +21,7 @@
     <div class="flex flex-col">
         <div class="flex mb-3 justify-center">
             <div class="relative basis-9/12 text-center">
-                    <a href="/"><div class="text-5xl font-extrabold">logo</div></a>
-                </button>
+                <a href="/"><div class="text-5xl font-extrabold">UMJUNSIK</div></a>
             </div>
             <div>
                 <div class="absolute top-3">
@@ -85,7 +84,9 @@
             </div>
         </div>
         <main>
-            {{ $slot }}
+            <div class="flex justify-center mt-10">
+                {{ $slot }}
+            </div>
         </main>
     </div>
     </body>

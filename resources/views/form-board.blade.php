@@ -8,6 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>mirupage</h1>
+    <x-app-layout>
+        <div class="max-w-screen-lg mx-2">
+            <div class="grid gap-6" style="grid-template-columns: repeat(3, minmax(0px, 1fr));">
+                <x-card></x-card>
+                <x-card></x-card>
+                <x-card></x-card>
+                <x-card></x-card>
+                <x-card></x-card>
+                <x-card></x-card>
+                <x-card></x-card>
+            </div>
+        </div>
+    </x-app-layout>
 </body>
 </html>
