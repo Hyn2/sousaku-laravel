@@ -24,7 +24,7 @@
                 <a href="/"><div class="text-5xl font-extrabold">UMJUNSIK</div></a>
             </div>
             <div>
-                <div class="absolute top-3">
+                <div class="absolute w-1/3 top-3">
                     @auth
                         <div class="absolute top-3">
                             <x-dropdown align="right" width="48">

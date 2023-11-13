@@ -9,23 +9,22 @@
 </head>
 <body>
     <x-app-layout>
-        <div class="flex flex-col basis-7/12 justify-center shadow">
+        <div class="flex flex-col h-[560px] basis-7/12 p-8 shadow">
             <x-input-label for="title" value="TITLE"/>
-            <x-text-input class="w-full" id="title" name="title" type="text" placeholder="TITLE"/>
-            <div class="flex justify-between">
-                <x-input-label for="gender" value="GENDER" />
-                <x-input-label for="region" value="REGION"/>
-                <x-input-label for="position" value="POSITION"/>
+            <x-text-input class="w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
+            <div class="my-1">
+                <div class="flex justify-between">
+                    <x-input-label class="w-3/12 text-center" for="gender" value="GENDER" />
+                    <x-input-label class="w-3/12 text-center" for="region" value="REGION"/>
+                    <x-input-label class="w-3/12 text-center" for="position" value="POSITION"/>
+                </div>
+                <div class="flex justify-between">
+                    <x-select id="gender"></x-select>
+                    <x-select id="region"></x-select>
+                    <x-select id="position"></x-select>
+                </div>
             </div>
-            <div class="flex justify-between">
-
-                <x-select id="gender"></x-select>
-
-                <x-select id="region"></x-select>
-
-                <x-select id="position"></x-select>
-            </div>
-            <x-quill></x-quill>
+            <x-quill class="my-3"></x-quill>
         </div>
     </x-app-layout>
 </body>

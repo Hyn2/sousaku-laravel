@@ -1,5 +1,5 @@
-<div>
-    <div>
+{{--<div {{ $attributes->merge(['class' => 'h-max']) }}>--}}
+    <div class="h-2/4">
         <!-- Include stylesheet -->
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
@@ -18,4 +18,4 @@
             });
         </script>
     </div>
-</div>
+{{--</div>--}}
