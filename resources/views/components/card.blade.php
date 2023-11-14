@@ -1,6 +1,6 @@
 <div class="p-1 flex w-full h-[350px] bg-white border rounded-2xl shadow flex-col">
     <div class="m-3 h-3/6">
-        <img class="object-none object-center w-full h-full ..." src="https://thumbs.dreamstime.com/z/music-notes-7544001.jpg?w=576">
+        <img class="object-none object-center w-full h-full" src="https://thumbs.dreamstime.com/z/music-notes-7544001.jpg?w=576">
     </div>
     <div class="mx-3 h-3/6">
         <div class=" mx-1 flex justify-between">

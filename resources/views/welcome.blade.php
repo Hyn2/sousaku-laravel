@@ -14,9 +14,9 @@
 
 </head>
 <x-app-layout>
-    <div>
-        <div class="w-1/3 h-2/5 bg-black">
-            <div class="w-full h-[300px] bg-black">asdf</div>
+    <div class="flex justify-center mt-10">
+        <div class="basis-3/4 bg-red-500">
+            <img class="w-full" src="https://getwallpapers.com/wallpaper/full/3/4/7/1430681-john-mayer-wallpaper-1920x1080-for-windows-7.jpg" />
         </div>
     </div>
 </x-app-layout>

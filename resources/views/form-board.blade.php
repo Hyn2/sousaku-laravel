@@ -9,8 +9,8 @@
 </head>
 <body>
     <x-app-layout>
-        <div class="max-w-screen-lg mx-2">
-            <div class="grid gap-6" style="grid-template-columns: repeat(3, minmax(0px, 1fr));">
+        <div class="flex justify-center mt-10 h-full">
+            <div class="basis-2/3 grid gap-6" style="grid-template-columns: repeat(3, minmax(0px, 1fr));">
                 <x-card></x-card>
                 <x-card></x-card>
                 <x-card></x-card>
