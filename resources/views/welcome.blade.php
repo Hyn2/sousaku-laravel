@@ -23,7 +23,6 @@
                <img id="3" class="h-auto min-w-full object-cover" src="{{env('CAROUSEL_IMAGE_PATH_3')}}">
            </div>
        </div>
-
        <div id="nextDiv" class="flex items-center ml-3">
             <button id="next" class="text-5xl">></button>
         </div>

@@ -12,6 +12,8 @@
             <div class="region">대구</div>
             <div class="view">523 Views</div>
         </div>
-        <p class="float-right" id="userName">v0v0v</p>
+        <div class="mt-1">
+            <p class="float-right" id="userName">v0v0v</p>
+        </div>
     </div>
 </div>

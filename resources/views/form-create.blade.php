@@ -10,23 +10,32 @@
 <body>
     <x-app-layout>
         <div class="flex justify-center mt-10">
-            <div class="flex basis-3/5 flex-col p-1">
-                <x-input-label for="title" value="TITLE"/>
-                <x-text-input class="w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
-                <div class="my-1">
-                    <div class="flex justify-between">
-                        <x-input-label class="w-3/12 text-center" for="gender" value="GENDER" />
-                        <x-input-label class="w-3/12 text-center" for="region" value="REGION"/>
-                        <x-input-label class="w-3/12 text-center" for="position" value="POSITION"/>
-                    </div>
-                    <div class="flex justify-between">
-                        <x-select id="gender"></x-select>
-                        <x-select id="region"></x-select>
-                        <x-select id="position"></x-select>
-                    </div>
+                <div class="flex basis-3/5 flex-col p-1">
+                    <form action="" method="post">
+                        <div class="flex justify-end">
+                            <button class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>
+                        </div>
+                        <div class="my-3">
+                            <x-input-label for="title" value="TITLE"/>
+                            <x-text-input class="w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
+                        </div>
+                        <div class="my-1">
+                            <div class="flex justify-between">
+                                <x-input-label class="w-3/12 text-center" for="gender" value="GENDER" />
+                                <x-input-label class="w-3/12 text-center" for="region" value="REGION"/>
+                                <x-input-label class="w-3/12 text-center" for="position" value="POSITION"/>
+                            </div>
+                            <div class="flex justify-between">
+                                <x-select id="gender"></x-select>
+                                <x-select id="region"></x-select>
+                                <x-select id="position"></x-select>
+                            </div>
+                        </div>
+                        <x-quill></x-quill>
+                    </form>
                 </div>
-                <x-quill></x-quill>
-            </div>
+
+
         </div>
     </x-app-layout>
 </body>
