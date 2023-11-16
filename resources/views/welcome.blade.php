@@ -16,11 +16,11 @@
         <div class="flex items-center">
             <button id="prev" class="text-5xl"><</button>
         </div>
-       <div id="carousel" class="w-[1200px] overflow-hidden">
-           <div id="container" class="w-full flex h-[700px]">
+       <div id="carousel" class="basis-2/3 overflow-hidden">
+           <div id="container" class="w-full flex pb-10">
                <img id="1" class="h-auto min-w-full object-cover" src={{env('CAROUSEL_IMAGE_PATH_1')}}/>
                <img id="2" class="h-auto min-w-full object-cover" src={{env('CAROUSEL_IMAGE_PATH_2')}}/>
-               <img id="3" class="h-auto min-w-fujl object-cover" src="{{env('CAROUSEL_IMAGE_PATH_3')}}">
+               <img id="3" class="h-auto min-w-full object-cover" src="{{env('CAROUSEL_IMAGE_PATH_3')}}">
            </div>
        </div>
 
