@@ -1,5 +1,4 @@
 import './bootstrap';
-import './carousel.js';
 
 import Alpine from 'alpinejs';
 

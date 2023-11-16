@@ -9,11 +9,11 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
-
+    @vite(['resources/js/carousel.js'])
 </head>
 <x-app-layout>
    <div class="flex justify-center mt-10">
-        <div class="flex items-center">
+        <div id="prevDiv" class="flex items-center mr-3">
             <button id="prev" class="text-5xl"><</button>
         </div>
        <div id="carousel" class="basis-2/3 overflow-hidden">
@@ -24,42 +24,9 @@
            </div>
        </div>
 
-       <div class="flex items-center">
+       <div id="nextDiv" class="flex items-center ml-3">
             <button id="next" class="text-5xl">></button>
         </div>
     </div>
 </x-app-layout>
-<script defer type="text/javascript">
-    // 변수 & 함수 선언
-    const container = document.querySelector('#container');
-    const nextButton = document.querySelector('#next');
-    const prevButton = document.querySelector('#prev');
-    const nextButtonClick = (e) => {
-        const id = e.target.id;
-        container.style.transform = `translateX(-${100}%)`;
-        container.style.transitionDuration = '700ms';
-        container.ontransitionend = () => {
-            replaceElement(id)
-        }
-    }
-    const prevButtonClick = (e) => {
-        const id = e.target.id;
-        container.style.transform = `translateX(${100}%)`;
-        container.style.transitionDuration = '700ms';
-        container.ontransitionend = () => {
-            replaceElement(id);
-        }
-    }
-
-    const replaceElement = (id) => {
-        container.removeAttribute('style');
-        (id === 'next') ?
-            container.appendChild(container.firstElementChild) :
-            container.insertBefore(container.lastElementChild, container.firstElementChild);
-    }
-
-    // 이벤트 등록
-    nextButton.addEventListener('click', nextButtonClick);
-    prevButton.addEventListener('click', prevButtonClick);
-</script>
 </html>
