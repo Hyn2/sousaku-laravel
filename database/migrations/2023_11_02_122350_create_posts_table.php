@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('content');
             $table->char('gender',1);
             $table->foreignId('region_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->unsignedBigInteger('views');
+            $table->foreignId('position_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('contact');
             $table->timestamps();
         });
@@ -29,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign(['region_id']);
+            $table->dropForeign(['region_id', 'position_id']);
             $table->dropIfExists();
         });
 

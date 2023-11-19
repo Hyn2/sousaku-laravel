@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class FormController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('form-board');
+        $posts = Post::all();
+        return view('form-board', ['posts' => $posts]);
     }
 
     /**
@@ -19,7 +24,10 @@ class FormController extends Controller
      */
     public function create()
     {
-        return view('form-create');
+        $positions = new PositionController();
+        $regions = new RegionController();
+
+        return view('form-create',['regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -27,7 +35,16 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::create([
+            'title'        => $request->title,
+            'gender'       => $request->gender,
+            'region_id'    => $request->region,
+            'position_id'  => $request->position,
+            'contact'      => $request->contact,
+            'content'      => $request->htmlContent,
+        ]);
+
+        return redirect('/form');
     }
 
     /**
