@@ -11,8 +11,12 @@
 
         <!-- region -->
         <div class="mt-4">
-            <x-input-label for="region_id" :value="__('Region')" />
-            <x-select id="region_id" name="region_id" class="block mt-1 w-full" :value="old('region')" />
+            <x-input-label for="region" :value="__('Region')" />
+            <x-select id="region" class="w-full" name="region_id" :value="old('region')">
+                @foreach($regions as $value)
+                    <option value={{$value->id}}>{{$value->region}}</option>
+                @endforeach
+            </x-select>
         </div>
 
         <!-- Email Address -->

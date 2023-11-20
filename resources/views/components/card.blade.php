@@ -4,16 +4,15 @@
     </div>
     <div class="mx-3 h-3/6">
         <div class=" mx-1 flex justify-between">
-            <p class="line-clamp-1" id="title">기타 구합니다 ~</p>
+            <p class="line-clamp-1" id="title">{{$post->title}}</p>
         </div>
-            <p class="line-clamp-2 my-2">안녕하세요 제이름은 엄준식이고요 엄준식 하하하하하하하하하하하 엄준식입니다. 허허허허하하하ㅏ 엄준식~~</p>
+            <p class="line-clamp-2 my-2">{{$post->content}}</p>
         <div class="flex pb-1 mb-0.5 border-b justify-between">
-            <div class="position">기타</div>
-            <div class="region">대구</div>
-            <div class="view">523 Views</div>
+            <div class="position">{{$post->position_id}}</div>
+            <div class="region">{{$post->region_id}}</div>
         </div>
         <div class="mt-1">
-            <p class="float-right" id="userName">v0v0v</p>
+            <p class="float-right" id="userName">{{$post->user_id}}</p>
         </div>
     </div>
 </div>

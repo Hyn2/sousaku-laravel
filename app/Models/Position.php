@@ -12,4 +12,8 @@ class Position extends Model
     protected $fillable =[
         'position',
     ];
+
+    public function posts() {
+        return $this->belongsToMany(Post::class);
+    }
 }

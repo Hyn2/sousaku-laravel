@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
@@ -15,7 +16,10 @@ class FormController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with(['region:id,region', 'positions:position'])->get();
+
+        return $posts;
+
         return view('form-board', ['posts' => $posts]);
     }
 
@@ -35,16 +39,28 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        Post::create([
-            'title'        => $request->title,
-            'gender'       => $request->gender,
-            'region_id'    => $request->region,
-            'position_id'  => $request->position,
-            'contact'      => $request->contact,
-            'content'      => $request->htmlContent,
-        ]);
+        if(Auth::check()) {
+            $id = Auth::id();
+            $post = Post::create([
+                'title'        => $request->title,
+                'gender'       => $request->gender,
+                'user_id'      => $id,
+                'region_id'    => $request->region,
+                'position_id'  => $request->position,
+                'contact'      => $request->contact,
+                'content'      => $request->htmlContent,
+            ]);
 
-        return redirect('/form');
+            $post->positions()->attach($post->position_id);
+
+            return redirect('/form');
+        } else {
+            return redirect('/login');
+        }
+
+
+
+
     }
 
     /**

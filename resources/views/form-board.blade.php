@@ -11,13 +11,9 @@
     <x-app-layout>
         <div class="flex justify-center mt-10 h-full">
             <div class="basis-2/3 grid gap-6" style="grid-template-columns: repeat(3, minmax(0px, 1fr));">
-                <x-card></x-card>
-                <x-card></x-card>
-                <x-card></x-card>
-                <x-card></x-card>
-                <x-card></x-card>
-                <x-card></x-card>
-                <x-card></x-card>
+                @foreach($posts as $post)
+                    <x-card :post="$post"></x-card>
+                @endforeach
             </div>
         </div>
     </x-app-layout>

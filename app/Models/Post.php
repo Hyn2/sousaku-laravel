@@ -14,12 +14,13 @@ class Post extends Model
         'title',
         'content',
         'gender',
+        'user_id',
         'region_id',
         'position_id',
         'contact',
     ];
     public function region() {
-        $this->hasOne(Region::class);
+        return $this->belongsTo(Region::class);
     }
 
     public function positions() {
