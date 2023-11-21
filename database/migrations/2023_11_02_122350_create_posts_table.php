@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title',50);
             $table->string('content');
+            $table->string('image');
             $table->char('gender',1);
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('region_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('position_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('contact');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -30,7 +29,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign(['region_id', 'position_id', 'user_id']);
+            $table->dropForeign(['user_id']);
             $table->dropIfExists();
         });
 

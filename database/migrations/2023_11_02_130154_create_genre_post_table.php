@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('genre_post', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('genre_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('post_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 
