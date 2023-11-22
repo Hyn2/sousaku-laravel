@@ -16,9 +16,7 @@ class FormController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['region:id,region', 'positions:position'])->get();
-
-        return $posts;
+        $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->get();
 
         return view('form-board', ['posts' => $posts]);
     }
@@ -45,8 +43,6 @@ class FormController extends Controller
                 'title'        => $request->title,
                 'gender'       => $request->gender,
                 'user_id'      => $id,
-                'region_id'    => $request->region,
-                'position_id'  => $request->position,
                 'contact'      => $request->contact,
                 'content'      => $request->htmlContent,
             ]);

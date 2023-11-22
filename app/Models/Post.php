@@ -15,8 +15,6 @@ class Post extends Model
         'content',
         'gender',
         'user_id',
-        'region_id',
-        'position_id',
         'contact',
     ];
     public function region() {
