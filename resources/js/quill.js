@@ -7,9 +7,30 @@ const imageHandler = () => {
         const formData = new FormData();
         formData.append('image', input.files[0]);
         const response = await axios.post('http://localhost:8000/api/image', formData);
-        console.log(response);
+        const editor = document.querySelector('.ql-editor');
+        const img = document.createElement('img');
+        img.setAttribute('src', response.data);
+        editor.appendChild(img);
     });
 }
+
+const target = document.querySelector('#editor');
+
+const config = {
+    childList: true,
+    subtree: true,
+};
+
+const observer = new MutationObserver((mutations, observer) => {
+    mutations.map((element)=> {
+        console.log(element);
+        // if(element.removedNodes.length > 0) {
+        //     console.log(element.removedNodes[0]);
+        // }
+    })
+});
+
+observer.observe(target, config);
 
 const modules = {
     toolbar: {

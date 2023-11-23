@@ -11,7 +11,7 @@
     <x-app-layout>
         <div class="flex justify-center mt-10">
             <div class="flex basis-3/5 flex-col p-1">
-                <form action="/form" method="post">
+                <form action="/form" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="flex justify-end">
                         <button class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>
@@ -51,9 +51,7 @@
                         </div>
                     </div>
                     <x-quill></x-quill>
-
                     <x-text-input hidden  type="text" id="htmlContent" name="htmlContent"/>
-
                 </form>
             </div>
         </div>
