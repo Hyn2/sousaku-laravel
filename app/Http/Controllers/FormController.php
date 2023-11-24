@@ -37,6 +37,9 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
+
+        $imageName = $request->image->store();
+
         if(Auth::check()) {
             $id = Auth::id();
             $post = Post::create([
@@ -45,6 +48,7 @@ class FormController extends Controller
                 'user_id'      => $id,
                 'contact'      => $request->contact,
                 'content'      => $request->htmlContent,
+                'image'        => env('IMAGE_BASE_URI').$imageName,
             ]);
 
             $post->positions()->attach($post->position_id);
@@ -53,10 +57,6 @@ class FormController extends Controller
         } else {
             return redirect('/login');
         }
-
-
-
-
     }
 
     /**

@@ -50,6 +50,14 @@
                             </x-select>
                         </div>
                     </div>
+                    <x-input-label class="w-3/12" for="image" value="IMAGE" />
+                    <div id="imageContainer" class="flex items-center w-auto h-20">
+                        <input id="image" type="file" name="image" />
+                        <div class="w-1/12 max-h-full overflow-hidden mr-1">
+                            <img id="preImg" class="max-h-full max-w-full">
+                        </div>
+                    </div>
+
                     <x-quill></x-quill>
                     <x-text-input hidden  type="text" id="htmlContent" name="htmlContent"/>
                 </form>

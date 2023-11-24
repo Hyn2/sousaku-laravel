@@ -16,6 +16,7 @@ class Post extends Model
         'gender',
         'user_id',
         'contact',
+        'image',
     ];
     public function region() {
         return $this->belongsTo(Region::class);
