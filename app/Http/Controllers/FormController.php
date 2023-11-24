@@ -37,6 +37,13 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'   => 'required|string',
+            'gender'  => 'required|string|max:1',
+            'contact' => 'required|string',
+            'content' => 'required|string',
+            'image'   => 'required|file',
+        ]);
 
         $imageName = $request->image->store();
 
@@ -52,8 +59,7 @@ class FormController extends Controller
             ]);
 
             $post->positions()->attach($post->position_id);
-
-            return redirect('/form');
+            return redirect('/');
         } else {
             return redirect('/login');
         }
