@@ -9,7 +9,7 @@
             @php
                 $content = strip_tags($post->content);
             @endphp
-            <p class="line-clamp-2 m-2">{{$content}}
+            <p class="line-clamp-1 m-2">{{$content}}
         <div class="flex pb-1 my-0.5 border-b justify-between">
             @foreach($post->positions as $post->position)
                 <div class="position">{{$post->position["position"]}}</div>

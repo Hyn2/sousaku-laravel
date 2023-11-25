@@ -1,0 +1,9 @@
+#category {
+    justify-content: center;
+}
+
+@media(min-width: 532px) {
+    #category {
+        justify-content: left;
+    }
+}
