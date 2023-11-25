@@ -1,9 +1,32 @@
+/*Mobile*/
 #category {
     justify-content: center;
 }
 
+#logoButton {
+    width: 76.5%;
+    padding-bottom: 22%;
+}
+#authContainer {
+    flex-direction: column;
+}
+
+/*Tablet*/
 @media(min-width: 532px) {
     #category {
         justify-content: left;
+    }
+    #logoButton {
+        width: 59%;
+        padding-bottom: 17%;
+    }
+}
+
+
+
+
+@media (min-width: 738px) {
+    #authContainer {
+        flex-direction: row;
     }
 }

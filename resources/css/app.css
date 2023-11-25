@@ -5,4 +5,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/*Mobile*/
+html{
+    font-size: 70%;
+}
+
+/*Tablet*/
+@media (min-width: 532px) {
+    html {
+        font-size: 75%;
+    }
+}
+
+/*PC*/
+@media(min-width: 961px) {
+    html {
+        font-size: 100%;
+    }
+}
+
 

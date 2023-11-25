@@ -1,13 +1,15 @@
+/*Mobile*/
 #postBox {
     grid-template-columns: repeat(1, minmax(0px, 1fr));
 }
 
-@media(min-width: 469px) {
+/*Tablet*/
+@media(min-width: 532px) {
     #postBox {
         grid-template-columns: repeat(2, minmax(0px, 1fr));
     }
 }
-
+/*PC*/
 @media(min-width: 961px) {
     #postBox {
         grid-template-columns: repeat(3, minmax(0px, 1fr));

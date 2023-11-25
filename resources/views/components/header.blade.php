@@ -1,16 +1,16 @@
 <div id="header" class="flex justify-center">
     <div class="flex basis-2/12 text-center items-center">
-        <a href="/"><img id="logo" class="w-fit h-10" src="/storage/LOGO_NEW.jpg" alt="logo"></a>
+        <a id="logoButton" class="relative" href="/"><img id="logo" class="absolute w-full h-full" src="/storage/LOGO_NEW.jpg" alt="logo"></a>
     </div>
     <div id="category" class="flex basis-7/12 pt-1 items-center">
-        <div class="mx-5">
+        <div class="mx-5 text-lg">
             <a href="{{route("form.create")}}">멤버 구하기</a>
         </div>
-        <div class="mx-5">
+        <div class="mx-5 text-lg">
             <a href="{{route('form.index')}}">공고 글</a>
         </div>
     </div>
-    <div class="basis-2/12 text-center pt-1">
+    <div id="authContainer" class="flex items-center justify-center basis-2/12 text-center pt-1">
         @auth
             <div>
                 <x-dropdown align="right" width="48">
