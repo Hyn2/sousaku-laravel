@@ -14,6 +14,7 @@ class Post extends Model
         'title',
         'content',
         'gender',
+        'region_id',
         'user_id',
         'contact',
         'image',
