@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class FormController extends Controller
 {
@@ -37,13 +36,19 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title'   => 'required|string',
-            'gender'  => 'required|string|max:1',
-            'contact' => 'required|string',
-            'content' => 'required|string',
-            'image'   => 'required|file',
-        ]);
+        try {
+            $request->validate([
+                'title'   => 'required|string',
+                'gender'  => 'required|string|max:1',
+                'contact' => 'required|string',
+                'htmlContent' => 'required|string',
+                'image'   => 'required|file',
+            ]);
+        } catch(ValidationException $e) {
+            $errMsg = $e->getMessage();
+            $errCode = $e->status;
+            return response($errMsg, $errCode);
+        }
 
         $imageName = $request->image->store();
 
@@ -52,13 +57,15 @@ class FormController extends Controller
             $post = Post::create([
                 'title'        => $request->title,
                 'gender'       => $request->gender,
+                'region_id'    => $request->region,
                 'user_id'      => $id,
                 'contact'      => $request->contact,
                 'content'      => $request->htmlContent,
                 'image'        => env('IMAGE_BASE_URI').$imageName,
             ]);
 
-            $post->positions()->attach($post->position_id);
+            $post->positions()->attach($request->position);
+
             return redirect('/');
         } else {
             return redirect('/login');

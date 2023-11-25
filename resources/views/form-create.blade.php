@@ -54,7 +54,7 @@
                     <div id="imageContainer" class="flex items-center w-auto h-20">
                         <input id="image" type="file" name="image" />
                         <div class="w-1/12 max-h-full overflow-hidden mr-1">
-                            <img id="preImg" class="max-h-full max-w-full" alt="preview_image">
+                            <img id="preImg" class="max-h-full max-w-full">
                         </div>
                     </div>
 
