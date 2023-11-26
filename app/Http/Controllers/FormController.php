@@ -43,6 +43,7 @@ class FormController extends Controller
                 'contact' => 'required|string',
                 'htmlContent' => 'required|string',
                 'image'   => 'required|file',
+                'positions' => 'required|array',
             ]);
         } catch(ValidationException $e) {
             $errMsg = $e->getMessage();

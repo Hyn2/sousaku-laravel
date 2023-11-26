@@ -12,7 +12,7 @@
             <p class="line-clamp-1 m-2">{{$content}}
         <div class="flex pb-1 my-0.5 border-b justify-between">
             @if(count($post->positions) > 1)
-                <x-tag class="position">{{$post->positions->first()->position." +".count($post->positions)}}</x-tag>
+                <div class="position">{{$post->positions->first()->position." +".count($post->positions)}}</div>
             @else
                 <div class="position">{{$post->positions->first()->position}}</div>
             @endif
