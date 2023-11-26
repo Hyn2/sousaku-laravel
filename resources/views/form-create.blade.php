@@ -28,12 +28,11 @@
                         <x-text-input class="w-full my-1" id="contact" name="contact" type="text" placeholder="CONTACT"/>
                     </div>
                     <div class="my-1">
-                        <div class="flex justify-between">
+                        <div class="flex justify-evenly">
                             <x-input-label class="w-3/12 text-center" for="gender" value="GENDER" />
                             <x-input-label class="w-3/12 text-center" for="region" value="REGION"/>
-                            <x-input-label class="w-3/12 text-center" for="position" value="POSITION"/>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-evenly">
                             <x-select name="gender">
                                 <option value="M">남자</option>
                                 <option value="F">여자</option>
@@ -43,11 +42,15 @@
                                     <option value={{$value->id}}>{{$value->region}}</option>
                                 @endforeach
                             </x-select>
-                            <x-select name="position">
-                                @foreach($positions as $value)
-                                    <option value={{$value->id}}>{{$value->position}}</option>
-                                @endforeach
+                            <x-select class="hidden" id="positions" name="positions[]" multiple="true">
                             </x-select>
+
+                        </div>
+                        <p class="text-sm">POSITION</p>
+                        <div class="my-5 flex">
+                            @foreach($positions as $value)
+                                <x-tag class="mx-3 hover:bg-gray-50, hover:scale-105" :value="$value->id">{{$value->position}}</x-tag>
+                            @endforeach
                         </div>
                     </div>
                     <x-input-label class="w-3/12" for="image" value="IMAGE" />
@@ -66,4 +69,3 @@
     </x-app-layout>
 </body>
 </html>
-@vite(['resources/js/quill.js'])

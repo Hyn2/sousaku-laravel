@@ -64,7 +64,10 @@ class FormController extends Controller
                 'image'        => env('IMAGE_BASE_URI').$imageName,
             ]);
 
-            $post->positions()->attach($request->position);
+            $positions = $request->positions;
+            foreach($positions as $position) {
+                $post->positions()->attach($position);
+            }
 
             return redirect('/');
         } else {

@@ -11,9 +11,11 @@
             @endphp
             <p class="line-clamp-1 m-2">{{$content}}
         <div class="flex pb-1 my-0.5 border-b justify-between">
-            @foreach($post->positions as $post->position)
-                <div class="position">{{$post->position["position"]}}</div>
-            @endforeach
+            @if(count($post->positions) > 1)
+                <x-tag class="position">{{$post->positions->first()->position." +".count($post->positions)}}</x-tag>
+            @else
+                <div class="position">{{$post->positions->first()->position}}</div>
+            @endif
             <div class="region">{{$post->region["region"]}}</div>
         </div>
         <div class="mt-1">
