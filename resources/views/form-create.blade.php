@@ -6,15 +6,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    @vite('/resources/js/quill.js')
 </head>
 <body>
     <x-app-layout>
         <div class="flex justify-center mt-10">
             <div class="flex basis-3/5 flex-col p-1">
-                <form action="/form" method="post" enctype="multipart/form-data">
+                <form id="postForm" action="/form" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="flex justify-end">
-                        <button class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>
+                        <button id="formSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>
                     </div>
                     <div class="my-1">
                         <x-input-label for="title" value="TITLE"/>
@@ -43,6 +44,9 @@
                                 @endforeach
                             </x-select>
                             <x-select class="hidden" id="positions" name="positions[]" multiple="true">
+                                @foreach($positions as $value)
+                                    <option id={{$value->id}} value={{$value->id}}></option>
+                                @endforeach
                             </x-select>
 
                         </div>
@@ -60,9 +64,8 @@
                             <img id="preImg" class="max-h-full max-w-full">
                         </div>
                     </div>
-
                     <x-quill></x-quill>
-                    <x-text-input hidden  type="text" id="htmlContent" name="htmlContent"/>
+                    <x-text-input hidden type="text" id="htmlContent" name="htmlContent"/>
                 </form>
             </div>
         </div>
