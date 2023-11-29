@@ -47,14 +47,8 @@ const quill = new Quill('#editor', {
     formats: formats,
 });
 quill.on('text-change', () => {
-    const data = quill.root.innerHTML;
+    const data = quill.getContents();
+    console.log(data);
     const content = document.querySelector('#htmlContent');
-    content.value = data;
+    content.value = JSON.stringify(data);
 });
-
-const target = document.querySelector('#editor');
-
-const config = {
-    childList: true,
-    subtree: true,
-};

@@ -81,7 +81,8 @@ class FormController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->findOrFail($id);
+        return view('form-post', ['post' => $post]);
     }
 
     /**
