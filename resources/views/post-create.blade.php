@@ -12,7 +12,7 @@
     <x-app-layout>
         <div class="flex justify-center mt-10">
             <div class="flex basis-3/5 flex-col p-1">
-                <form id="postForm" action="/form" method="post" enctype="multipart/form-data">
+                <form id="postForm" action="/post" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="flex justify-end">
                         <button id="formSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>

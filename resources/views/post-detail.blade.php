@@ -4,13 +4,21 @@
         <div class="grid basis-3/5 mt-20 place-items-center">
             <div class="pb-1 my-3 border-b w-full">
                 <h1 class="text-4xl px-3 text-center whitespace-pre-wrap">{{$post->title}}</h1>
-                <div class="flex justify-between my-3 items-center">
-                    <div class="flex gap-3">
-                        <button id="edit" class="w-16 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">수정</button>
-                        <button id="edit" class="w-16 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">삭제</button>
+                <div class="flex ml-1.5 justify-between my-3">
+                    <div class="flex gap-3 items-end">
+                        <form action="/post/{{$post->id}}" method="post">
+                            @method("PATCH")
+                            @csrf
+                            <x-primary-button id="editPost">수정</x-primary-button>
+                        </form>
+                        <form action="/post/{{$post->id}}" method="post">
+                            @method("DELETE")
+                            @csrf
+                            <x-primary-button id="deletePost">삭제</x-primary-button>
+                        </form>
                     </div>
-                    <div class="text-right">
-                        <div class="">{{$post->user->name}}</div>
+                    <div class="text-right items-center">
+                        <div>{{$post->user->name}}</div>
                         <div>{{$post->created_at}}</div>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class FormController extends Controller
+class PostController extends Controller
 {
 
     /**
@@ -17,7 +17,7 @@ class FormController extends Controller
     {
         $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->get();
 
-        return view('form-board', ['posts' => $posts]);
+        return view('post-board', ['posts' => $posts]);
     }
 
     /**
@@ -28,7 +28,7 @@ class FormController extends Controller
         $positions = new PositionController();
         $regions = new RegionController();
 
-        return view('form-create',['regions' => $regions(), 'positions' => $positions()]);
+        return view('post-create',['regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -79,10 +79,9 @@ class FormController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        $post = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->findOrFail($id);
-        return view('form-post', ['post' => $post]);
+        return view('post-detail', ['post' => $post]);
     }
 
     /**
@@ -104,8 +103,10 @@ class FormController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect('/post');
     }
 }
