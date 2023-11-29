@@ -4,10 +4,10 @@
     </div>
     <div id="category" class="flex basis-7/12 pt-1 items-center">
         <div class="mx-5 text-lg">
-            <a href="{{route("form.create")}}">멤버 구하기</a>
+            <a href="{{route("post.create")}}">멤버 구하기</a>
         </div>
         <div class="mx-5 text-lg">
-            <a href="{{route('form.index')}}">공고 글</a>
+            <a href="{{route('post.index')}}">공고 글</a>
         </div>
     </div>
     <div id="authContainer" class="flex items-center justify-center basis-2/12 text-center pt-1">

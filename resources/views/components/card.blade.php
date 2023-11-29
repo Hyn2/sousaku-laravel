@@ -1,4 +1,4 @@
-<a class="text-left" href="{{route("form.show", ['form' => $post->id])}}">
+<a class="text-left" href="{{route("post.show", ['post' => $post->id])}}">
     <div class="p-1 flex w-full h-[350px] bg-white border rounded-2xl shadow flex-col">
         <div class="m-3 h-3/6">
             <img alt="postImage" class="object-none object-center w-full h-full" src={{$post->image}}>
