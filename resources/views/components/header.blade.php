@@ -1,8 +1,8 @@
 <div id="header" class="flex justify-center">
     <div class="flex basis-2/12 text-center items-center">
-        <a id="logoButton" class="relative" href="/"><img id="logo" class="absolute w-full h-full" src="/storage/LOGO_NEW.jpg" alt="logo"></a>
+        <a class="relative w-[76.5%] pb-[22%] min-[532px]:w-[59%] min-[532px]:pb-[17%]" href="/"><img id="logo" class="absolute w-full h-full" src="/storage/LOGO_NEW.jpg" alt="logo"></a>
     </div>
-    <div id="category" class="flex basis-7/12 pt-1 items-center">
+    <div class="flex basis-7/12 pt-1 justify-center items-center min-[532px]:justify-start">
         <div class="mx-5 text-lg">
             <a href="{{route("post.create")}}">멤버 구하기</a>
         </div>
@@ -10,7 +10,7 @@
             <a href="{{route('post.index')}}">공고 글</a>
         </div>
     </div>
-    <div id="authContainer" class="flex items-center justify-center basis-2/12 text-center pt-1">
+    <div class="flex items-center justify-center basis-2/12 text-center pt-1 flex-col min-[738px]:flex-row">
         @auth
             <div>
                 <x-dropdown align="right" width="48">

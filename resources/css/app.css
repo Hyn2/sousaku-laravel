@@ -1,31 +1,27 @@
-@import 'board.css';
-@import 'header.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*Mobile*/
-html{
-    font-size: 70%;
-}
-
-/*Tablet*/
-@media (min-width: 532px) {
-    html {
-        font-size: 75%;
-    }
-}
-
-/*PC*/
-@media(min-width: 961px) {
-    html {
-        font-size: 100%;
-    }
-}
-
 .clicked {
     background-color: #718096;
+}
+
+@layer base {
+    h1 {
+        @apply
+        text-3xl
+        font-bold
+    }
+    h2 {
+        @apply
+        text-2xl
+        font-semibold
+    }
+    h3 {
+        @apply
+        text-xl
+        font-semibold
+    }
 }
 
 
