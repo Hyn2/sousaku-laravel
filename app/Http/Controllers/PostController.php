@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+
 
 class PostController extends Controller
 {
@@ -62,7 +64,7 @@ class PostController extends Controller
                 'user_id'      => $id,
                 'contact'      => $request->contact,
                 'content'      => $request->htmlContent,
-                'image'        => env('IMAGE_BASE_URI').$imageName,
+                'image'        => Storage::url($imageName),
             ]);
 
             $positions = $request->positions;
@@ -105,8 +107,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
-
-        return redirect('/post');
+        $filePath = basename($post->image);
+        if(Storage::exists($filePath)) {
+            $deleteImage = Storage::delete('/asdfasdfzzzz/'.$filePath);
+            if(!$deleteImage) return redirect('/post')->with('response' , 'Failed to Delete Image');
+        }
+        return redirect('/post')->with('response', $post->delete() ? 'Post deleted successfully' : 'Failed to delete post');
     }
 }
