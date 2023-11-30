@@ -6,6 +6,10 @@
                 <h1 class="text-4xl px-3 text-center whitespace-pre-wrap">{{$post->title}}</h1>
                 <div class="flex ml-1.5 justify-between my-3">
                     <div class="flex gap-3 items-end">
+                        @php
+                        $userID = auth()->user();
+                        @endphp
+                        @if($userID->id ?? false == $post->user_id)
                         <form action="/post/{{$post->id}}" method="post">
                             @method("PATCH")
                             @csrf
@@ -14,8 +18,9 @@
                         <form action="/post/{{$post->id}}" method="post">
                             @method("DELETE")
                             @csrf
-                            <x-primary-button id="deletePost">삭제</x-primary-button>
+                            <x-primary-button id="deletePost" onclick="confirm('삭제할거에요?')">삭제</x-primary-button>
                         </form>
+                        @endif
                     </div>
                     <div class="text-right items-center">
                         <div>{{$post->user->name}}</div>
