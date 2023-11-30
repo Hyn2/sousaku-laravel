@@ -47,8 +47,7 @@ const quill = new Quill('#editor', {
     formats: formats,
 });
 quill.on('text-change', () => {
-    const data = quill.getContents();
-    console.log(data);
+    const data = quill.root.innerHTML;
     const content = document.querySelector('#htmlContent');
-    content.value = JSON.stringify(data);
+    content.value = data;
 });
