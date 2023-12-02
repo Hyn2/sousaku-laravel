@@ -43,7 +43,7 @@
                     <p class="text-sm">POSITION</p>
                     <div class="my-5 flex">
                         @foreach($positions as $value)
-                            <x-tag class="mx-3 hover:bg-gray-50, hover:scale-105" :value="$value->id">{{$value->position}}</x-tag>
+                            <x-tag class="mx-3 hover:scale-105" :value="$value->id">{{$value->position}}</x-tag>
                         @endforeach
                     </div>
                 </div>

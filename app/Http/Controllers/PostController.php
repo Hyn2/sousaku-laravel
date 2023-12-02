@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -11,14 +12,12 @@ use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->get();
-
+        $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
         return view('post-board', ['posts' => $posts]);
     }
 
@@ -27,10 +26,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $positions = new PositionController();
         $regions = new RegionController();
-
-        return view('post-create',['regions' => $regions(), 'positions' => $positions()]);
+        $positions = new PositionController();
+        return view('post-create', ['regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -40,42 +38,35 @@ class PostController extends Controller
     {
         try {
             $request->validate([
-                'title'   => 'required|string',
-                'gender'  => 'required|string|max:1',
+                'title' => 'required|string',
+                'gender' => 'required|string|max:1',
                 'contact' => 'required|string',
                 'htmlContent' => 'required|string',
-                'image'   => 'required|file',
+                'image' => 'required|file',
                 'positions' => 'required|array',
             ]);
-        } catch(ValidationException $e) {
+        } catch (ValidationException $e) {
             $errMsg = $e->getMessage();
             $errCode = $e->status;
             return response($errMsg, $errCode);
         }
 
-        $imageName = $request->image->store();
+        $post = Post::create([
+            'title' => $request->title,
+            'gender' => $request->gender,
+            'region_id' => $request->region,
+            'user_id' => Auth::id(),
+            'contact' => $request->contact,
+            'content' => $request->htmlContent,
+            'image' => Storage::url($request->image->store()),
+        ]);
 
-        if(Auth::check()) {
-            $id = Auth::id();
-            $post = Post::create([
-                'title'        => $request->title,
-                'gender'       => $request->gender,
-                'region_id'    => $request->region,
-                'user_id'      => $id,
-                'contact'      => $request->contact,
-                'content'      => $request->htmlContent,
-                'image'        => Storage::url($imageName),
-            ]);
-
-            $positions = $request->positions;
-            foreach($positions as $position) {
-                $post->positions()->attach($position);
-            }
-
-            return redirect('/');
-        } else {
-            return redirect('/login');
+        $positions = $request->positions;
+        foreach ($positions as $position) {
+            $post->positions()->attach($position);
         }
+
+        return redirect('/');
     }
 
     /**
@@ -89,9 +80,12 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        //
+        $regions = new RegionController();
+        $positions = new PositionController();
+
+        return view('post-edit', ['post' => $post, 'postPosition' => $post->positions, 'regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -99,7 +93,44 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validation
+        try {
+            $request->validate([
+                'title' => 'required|string',
+                'gender' => 'required|string|max:1',
+                'contact' => 'required|string',
+                'htmlContent' => 'required|string',
+                'image' => 'required|file',
+                'positions' => 'required|array',
+            ]);
+        } catch (ValidationException $e) {
+            $errMsg = $e->getMessage();
+            $errCode = $e->getCode();
+            return response($errMsg, $errCode);
+        }
+
+        // Model
+        try {
+            $post = Post::findOrFail($id);
+        } catch(ModelNotFoundException $e) {
+            return response($e->getMessage(),$e->getCode());
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'gender' => $request->gender,
+            'region_id' => $request->region,
+            'contact' => $request->contact,
+            'content' => $request->htmlContent,
+            'image' => Storage::url($request->image->store()),
+        ]);
+
+        $positions = $request->positions;
+        foreach ($positions as $position) {
+            $post->positions()->attach($position);
+        }
+
+        return redirect('/post/'.$id);
     }
 
     /**
@@ -109,7 +140,7 @@ class PostController extends Controller
     {
         $filePath = basename($post->image);
         if(Storage::exists($filePath)) {
-            $deleteImage = Storage::delete('/asdfasdfzzzz/'.$filePath);
+            $deleteImage = Storage::delete($filePath);
             if(!$deleteImage) return redirect('/post')->with('response' , 'Failed to Delete Image');
         }
         return redirect('/post')->with('response', $post->delete() ? 'Post deleted successfully' : 'Failed to delete post');

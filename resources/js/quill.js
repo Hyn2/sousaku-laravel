@@ -51,3 +51,5 @@ quill.on('text-change', () => {
     const content = document.querySelector('#htmlContent');
     content.value = data;
 });
+
+

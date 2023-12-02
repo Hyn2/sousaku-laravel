@@ -1,5 +1,5 @@
+@vite('resources/js/quillReader.js');
 <x-app-layout>
-    @vite('resources/js/quillReader.js');
     <div class="flex justify-center">
         <div class="grid basis-3/5 mt-20 place-items-center">
             <div class="pb-1 my-3 border-b w-full">
@@ -10,12 +10,10 @@
                         $userID = auth()->user();
                         @endphp
                         @if($userID->id ?? false == $post->user_id)
-                        <form action="/post/{{$post->id}}" method="post">
-                            @method("PATCH")
-                            @csrf
+                        <form action="/post/{{$post->id}}/edit" method="GET">
                             <x-primary-button id="editPost">수정</x-primary-button>
                         </form>
-                        <form action="/post/{{$post->id}}" method="post">
+                        <form action="/post/{{$post->id}}" method="POST">
                             @method("DELETE")
                             @csrf
                             <x-primary-button id="deletePost" onclick="confirm('삭제할거에요?')">삭제</x-primary-button>
@@ -42,12 +40,10 @@
                 <h6 class="font-bold text-gray-700">지역</h6>
                 <x-tag :value="$post->region->region">{{$post->region->region}}</x-tag>
             </div>
-            <div class="w-[80%] shadow">
+            <div class="w-[80%]">
                 <img class="rounded" alt="post_image" src={{$post->image}}  />
             </div>
-            <div id="editorReadOnly" class="mt-3 border-t pt-10 w-[90%]" data="{!! $post->content !!}">
-
-            </div>
+            <div id="editorReadOnly" class="mt-3 border-t pt-10 w-[90%]" data="{!! $post->content !!}"></div>
         </div>
     </div>
 </x-app-layout>
