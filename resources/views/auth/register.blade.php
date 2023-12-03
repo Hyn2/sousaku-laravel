@@ -1,3 +1,4 @@
+
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -18,6 +19,30 @@
                 @endforeach
             </x-select>
         </div>
+
+        <!-- gender -->
+        <div class="mt-4">
+            <x-input-label for="gender" :value="__('Gender')" />
+            <x-select id="gender" class="w-full" name="gender" :value="old('gender')">
+                    <option value="M">남성</option>
+                    <option value="F">여성</option>
+            </x-select>
+        </div>
+
+        <!-- position -->
+        <div class="mt-4">
+            <x-input-label for="positions" :value="__('Position')" class="mb-1.5" />
+                @foreach($positions as $position)
+                    <x-tag class="mx-0.5 hover:scale-105" :value="$position->id">{{$position->position}}</x-tag>
+                @endforeach
+            <x-input-error :messages="$errors->get('positions')" class="mt-2" />
+        </div>
+
+        <x-select id="positions" name="positions[]" multiple="true">
+            @foreach($positions as $value)
+                <option id={{$value->id}} value={{$value->id}}></option>
+            @endforeach
+        </x-select>
 
         <!-- Email Address -->
         <div class="mt-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\RegionController;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -22,7 +23,8 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $regions = new RegionController();
-        return view('auth.register', ['regions' => $regions()]);
+        $positions = new PositionController();
+        return view('auth.register', ['regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -30,12 +32,15 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'region_id' => ['required', 'numeric'],
+            'gender' => ['required', 'string', 'size:1'],
+            'positions'=> ['required', 'array'],
         ]);
 
         $user = User::create([
@@ -43,7 +48,13 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'region_id' => $request->region_id,
+            'gender' => $request->gender,
         ]);
+
+        $positions = $request->positions;
+        foreach ($positions as $position) {
+            $user->positions()->attach($position);
+        }
 
         event(new Registered($user));
 
