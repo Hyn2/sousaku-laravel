@@ -38,7 +38,6 @@
                                 <option id={{$value->id}} value={{$value->id}}></option>
                             @endforeach
                         </x-select>
-
                     </div>
                     <p class="text-sm">POSITION</p>
                     <div class="my-5 flex">

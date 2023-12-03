@@ -34,7 +34,7 @@
                         </x-select>
                         <x-select class="hidden" id="positions" name="positions[]" multiple="true">
                             @foreach($positions as $value)
-                                <option id={{$value->id}} value={{$value->id}} {{($value->id === 1) ? 'selected' : ''}}></option>
+                                <option id={{$value->id}} value={{$value->id}} {{($postPosition->contains('id', $value->id)) ? 'selected' : ''}}></option>
                             @endforeach
                         </x-select>
 
@@ -43,7 +43,7 @@
                     <div class="my-5 flex">
                         @foreach($positions as $value)
                             <x-tag class="mx-3 hover:scale-105
-                            {{($value->id === 1) ? 'clicked' : ''}}" :value="$value->id">{{$value->position}}</x-tag>
+                            {{($postPosition->contains('id', $value->id)) ? 'clicked' : ''}}" :value="$value->id">{{$value->position}}</x-tag>
                         @endforeach
                     </div>
                 </div>
