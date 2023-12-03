@@ -36,7 +36,7 @@
                     @endforeach
                 </div>
                 <div class="flex justify-end">
-                    <button id="searchSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>
+                    <button id="searchSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">검색</button>
                 </div>
             </form>
         </div>

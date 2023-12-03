@@ -38,7 +38,7 @@
             <x-input-error :messages="$errors->get('positions')" class="mt-2" />
         </div>
 
-        <x-select id="positions" name="positions[]" multiple="true">
+        <x-select class="hidden" id="positions" name="positions[]" multiple="true">
             @foreach($positions as $value)
                 <option id={{$value->id}} value={{$value->id}}></option>
             @endforeach
