@@ -10,6 +10,21 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- contact -->
+        <div class="mt-4">
+            <x-input-label for="contact" :value="__('Contact')" />
+            <x-text-input id="contact" class="block mt-1 w-full" type="text" name="contact" :value="old('contact')" required />
+            <x-input-error :messages="$errors->get('contact')" class="mt-2" />
+        </div>
+
+        <!-- bio -->
+        <div class="mt-4">
+            <x-input-label for="bio" :value="__('Bio')" />
+            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" required />
+            <x-input-error :messages="$errors->get('bio')" class="mt-2" />
+        </div>
+
+
         <!-- region -->
         <div class="mt-4">
             <x-input-label for="region" :value="__('Region')" />

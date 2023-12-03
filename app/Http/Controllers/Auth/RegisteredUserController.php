@@ -41,6 +41,8 @@ class RegisteredUserController extends Controller
             'region_id' => ['required', 'numeric'],
             'gender' => ['required', 'string', 'size:1'],
             'positions'=> ['required', 'array'],
+            'contact' => ['required', 'string'],
+            'bio' => ['required', 'string'],
         ]);
 
         $user = User::create([
@@ -49,6 +51,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'region_id' => $request->region_id,
             'gender' => $request->gender,
+            'contact' => $request->contact,
+            'bio' => $request->bio,
         ]);
 
         $positions = $request->positions;

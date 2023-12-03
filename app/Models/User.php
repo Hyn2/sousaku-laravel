@@ -24,7 +24,6 @@ class User extends Authenticatable
         'gender',
         'region_id',
         'contact',
-        'profile_image',
         'bio',
     ];
 
