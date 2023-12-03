@@ -9,7 +9,7 @@
                         @php
                         $userID = auth()->user();
                         @endphp
-                        @if($userID->id ?? false == $post->user_id)
+                        @if(($userID->id ?? false) == $post->user_id)
                         <form action="/post/{{$post->id}}/edit" method="GET">
                             <x-primary-button id="editPost">수정</x-primary-button>
                         </form>
