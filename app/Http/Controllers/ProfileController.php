@@ -16,8 +16,13 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $regions = new RegionController();
+        $positions = new PositionController();
         return view('profile.edit', [
             'user' => $request->user(),
+            'userPosition' => $request->user()->positions,
+            'regions' => $regions(),
+            'positions' => $positions(),
         ]);
     }
 
@@ -27,6 +32,17 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
+
+        $oldPositions = $request->user()->positions;
+        foreach ($oldPositions as $oldPosition) {
+            $request->user()->positions()->detach($oldPosition->id);
+        }
+
+        $positions = $request->positions;
+
+        foreach($positions as $position) {
+            $request->user()->positions()->attach($position);
+        }
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;

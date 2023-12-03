@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            이메일과 닉네임을 업데이트할 수 있습니다.
+            이메일과 닉네임 및 기타 정보를 업데이트할 수 있습니다.
         </p>
     </header>
 
@@ -17,12 +17,14 @@
         @csrf
         @method('patch')
 
+        {{--이름--}}
         <div>
             <x-input-label for="name" :value="__('이름')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
+        {{--이메일--}}
         <div>
             <x-input-label for="email" :value="__('이메일')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
@@ -45,6 +47,54 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        {{--연락--}}
+        <div>
+            <x-input-label for="contact" :value="__('연락')" />
+            <x-text-input id="contact" name="contact" type="text" class="mt-1 block w-full" :value="old('contact', $user->contact)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('contact')" />
+        </div>
+
+        {{--소개--}}
+        <div>
+            <x-input-label for="bio" :value="__('소개')" />
+            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full" :value="old('bio', $user->bio)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+        </div>
+
+        {{--성별--}}
+        <div>
+            <x-input-label class="w-3/12" for="gender" value="GENDER" />
+            <x-select name="gender">
+                <option value="M" @if($user->gender == "M") selected @endif>남자</option>
+                <option value="F" @if($user->gender == "F") selected @endif>여자</option>
+            </x-select>
+        </div>
+
+        {{--지역--}}
+        <div>
+            <x-input-label class="w-3/12" for="region_id" value="REGION"/>
+            <x-select name="region_id">
+                @foreach($regions as $value)
+                    <option value={{$value->id}}@if($user->region_id == $value->id) selected @endif>{{$value->region}}</option>
+                @endforeach
+            </x-select>
+        </div>
+
+        {{--포지션--}}
+        <div>
+            <x-select class="hidden" id="positions" name="positions[]" multiple="true">
+                @foreach($positions as $value)
+                    <option id={{$value->id}} value={{$value->id}} {{($userPosition->contains('id', $value->id)) ? 'selected' : ''}}></option>
+                @endforeach
+            </x-select>
+            <p class="text-sm">POSITION</p>
+            <div class="mt-1.5 flex">
+                @foreach($positions as $value)
+                    <x-tag class="mx-3 hover:scale-105 {{($userPosition->contains('id', $value->id)) ? 'clicked' : ''}}" :value="$value->id" >{{$value->position}}</x-tag>
+                @endforeach
+            </div>
         </div>
 
         <div class="flex items-center gap-4">
