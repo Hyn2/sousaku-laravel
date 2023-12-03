@@ -15,10 +15,27 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
-        return view('post-board', ['posts' => $posts]);
+        $regions = new RegionController();
+        $positions = new PositionController();
+
+        if(!empty($request->positions)) {
+            $positionIds = $request->positions;
+            $posts = Post::whereHas('positions', function ($query) use ($positionIds) {
+                $query->whereIn('position_id', $positionIds);
+            })->get();
+        } else {
+            $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
+        }
+        if(!empty($request->gender)) {
+            $posts = $posts->where('gender', $request->gender);
+        }
+        if(!empty($request->region)) {
+            $posts = $posts->where('region_id', $request->region);
+        }
+
+        return view('post-board', ['posts' => $posts, 'positions' => $positions(), 'regions' => $regions()]);
     }
 
     /**
@@ -85,7 +102,7 @@ class PostController extends Controller
         $regions = new RegionController();
         $positions = new PositionController();
 
-        return view('post-edit', ['post' => $post, 'postPosition' => $post->positions, 'regions' => $regions(), 'positions' => $positions()]);
+        return view('post-edit', ['post' => $post, 'postPosition' => $post->positions->setVisible(['id']), 'regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -116,6 +133,11 @@ class PostController extends Controller
             return response($e->getMessage(),$e->getCode());
         }
 
+        $oldPositions = $post->positions->setVisible(['id']);
+        foreach ($oldPositions as $oldPosition) {
+            $post->positions()->detach($oldPosition->id);
+        }
+
         $post->update([
             'title' => $request->title,
             'gender' => $request->gender,
@@ -125,9 +147,9 @@ class PostController extends Controller
             'image' => Storage::url($request->image->store()),
         ]);
 
-        $positions = $request->positions;
-        foreach ($positions as $position) {
-            $post->positions()->attach($position);
+        $newPositions = $request->positions;
+        foreach ($newPositions as $newPosition) {
+            $post->positions()->attach($newPosition);
         }
 
         return redirect('/post/'.$id);
