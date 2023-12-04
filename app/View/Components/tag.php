@@ -14,7 +14,7 @@ class tag extends Component
      */
 
     public $value;
-    public function __construct($value)
+    public function __construct($value = null)
     {
         $this->value = $value;
     }
