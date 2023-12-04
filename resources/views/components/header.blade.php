@@ -2,12 +2,12 @@
     <div class="flex basis-2/12 text-center items-center">
         <a class="relative w-[76.5%] pb-[22%] min-[532px]:w-[59%] min-[532px]:pb-[17%]" href="/"><img id="logo" class="absolute w-full h-full" src="/storage/LOGO_NEW.jpg" alt="logo"></a>
     </div>
-    <div class="flex basis-7/12 pt-1 justify-center items-center min-[532px]:justify-start">
-        <div class="mx-5 text-lg">
-            <a href="{{route("post.create")}}">멤버 구하기</a>
+    <div class="flex basis-7/12 pt-2 justify-center items-center min-[532px]:justify-start">
+        <div class="mx-5 hover:scale-105">
+            <x-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">멤버 구하기</x-nav-link>
         </div>
-        <div class="mx-5 text-lg">
-            <a href="{{route('post.index')}}">공고 글</a>
+        <div class="mx-5 hover:scale-105">
+            <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">공고 글</x-nav-link>
         </div>
     </div>
     <div class="flex items-center justify-center basis-2/12 text-center pt-1 flex-col min-[738px]:flex-row">

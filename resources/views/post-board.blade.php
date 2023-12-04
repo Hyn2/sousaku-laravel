@@ -26,7 +26,7 @@
                     </x-select>
                 </div>
                 <p class="text-sm">POSITION</p>
-                <div class="my-5 flex">
+                <div class="my-5 flex flex-wrap">
                     @foreach($positions as $value)
                         <x-tag id="tag" class="mx-3 hover:scale-105 {{(in_array($value->id ,$query['positions'] ?? [])) ? 'clicked' : ''}}" :value="$value->id" >{{$value->position}}</x-tag>
                     @endforeach
@@ -43,8 +43,8 @@
     </div>
     <div class="flex justify-center mt-10 h-full">
         @if(count($posts) === 0)
-            <div class="w-full my-3 text-center">
-                <p class="text-4xl font-bold">검색 결과가 없습니다!</p>
+            <div class="w-full mt-12 text-center">
+                <p class="text-4xl font-thin">검색 결과가 없습니다</p>
             </div>
         @else
             <div id="postBox" class="basis-4/5 grid gap-6 lg:grid-cols-3 min-[532px]:grid-cols-2 grid-cols-1">

@@ -1,4 +1,3 @@
-{{--@vite('/resources/js/quill.js')--}}
 <x-app-layout>
     <div class="flex justify-center mt-10">
         <div class="flex basis-3/5 flex-col p-1">
@@ -12,10 +11,6 @@
                     <x-input-label for="title" value="TITLE"/>
                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     <x-text-input class="w-full my-1" :value="old('title', $post->title)" id="title" name="title" type="text" placeholder="TITLE"/>
-                </div>
-                <div class="my-1">
-                    <x-input-label for="contact" value="CONTACT"/>
-                    <x-text-input class="w-full my-1" id="contact" name="contact" type="text" :value="old('contact', $post->contact)" placeholder="CONTACT"/>
                 </div>
                 <div class="my-1">
                     <div class="flex justify-evenly">
@@ -41,7 +36,7 @@
                     </div>
                     <p class="text-sm">POSITION</p>
                     <x-input-error :messages="$errors->get('positions')" class="mt-2" />
-                    <div class="my-5 flex">
+                    <div class="my-5 flex flex-wrap">
                         @foreach($positions as $value)
                             <x-tag class="mx-3 hover:scale-105
                             {{($postPosition->contains('id', $value->id)) ? 'clicked' : ''}}" :value="$value->id">{{$value->position}}</x-tag>

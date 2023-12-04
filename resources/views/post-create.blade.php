@@ -7,11 +7,10 @@
                 <div class="flex justify-end">
                     <x-primary-button id="formSubmit">작성</x-primary-button>
                 </div>
-                <div class="my-1">
+                <div class="my-1 items-center">
                     <x-input-label class="w-fit" for="title" value="TITLE"/>
                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     <x-text-input class="w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
-
                 </div>
                 <div class="my-1">
                     <div class="flex justify-evenly">
@@ -36,7 +35,7 @@
                     </div>
                     <p class="text-sm">POSITION</p>
                     <x-input-error :messages="$errors->get('positions')" class="mt-2" />
-                    <div class="my-5 flex">
+                    <div class="my-5 flex flex-wrap">
                         @foreach($positions as $value)
                             <x-tag class="mx-3 hover:scale-105" :value="$value->id">{{$value->position}}</x-tag>
                         @endforeach

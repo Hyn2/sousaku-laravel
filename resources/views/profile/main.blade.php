@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-gray-50 overflow-hidden shadow-sm sm:rounded-lg flex flex-col">
+            <div class="bg-gray-50 overflow-hidden shadow-sm sm:rounded-lg flex flex-col p-14">
                 <iframe class="w-full shadow-2xl"
                         height="315" src=""
                         title="YouTube video player"
