@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function show(User $user): View
+    {
+        $userPositions = $user->positions;
+        return view('profile.main', ['user'=>$user, 'userPositions'=>$userPositions]);
+    }
     /**
      * Display the user's profile form.
      */
@@ -33,13 +39,14 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
+        // 이전 포지션 값
         $oldPositions = $request->user()->positions;
         foreach ($oldPositions as $oldPosition) {
             $request->user()->positions()->detach($oldPosition->id);
         }
 
+        // 변경하려고 하는 포지션 값
         $positions = $request->positions;
-
         foreach($positions as $position) {
             $request->user()->positions()->attach($position);
         }
@@ -50,7 +57,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.show', ['user' => $request->user()]);
     }
 
     /**

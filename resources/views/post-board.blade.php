@@ -32,8 +32,8 @@
                     @endforeach
                 </div>
                 <div class="flex justify-between">
-                    <button form="resetForm" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">초기화</button>
-                    <button form="searchForm" id="searchSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">검색</button>
+                    <x-primary-button form="resetForm">초기화</x-primary-button>
+                    <x-primary-button form="searchForm" id="searchSubmit">검색</x-primary-button>
                 </div>
             </form>
             {{--resetForm--}}

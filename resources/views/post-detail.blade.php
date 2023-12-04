@@ -21,7 +21,7 @@
                         @endif
                     </div>
                     <div class="text-right items-center">
-                        <div>{{$post->user->name}}</div>
+                        <div class="rounded-2xl text-gray-700 hover:scale-105 hover:text-black" ><a href={{route('profile.show', ['user'=>$post->user_id])}}>{{$post->user->name}}</a></div>
                         <div>{{$post->created_at}}</div>
                     </div>
                 </div>
