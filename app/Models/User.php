@@ -49,7 +49,7 @@ class User extends Authenticatable
     ];
 
     public function region() {
-        $this->hasOne(Region::class);
+        return $this->belongsTo(Region::class);
 
     }
 
