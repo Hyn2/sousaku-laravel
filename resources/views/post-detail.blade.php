@@ -33,6 +33,10 @@
                     <p class=" mx-1 font-medium text-gray-700">{{$post->user->email}}</p>
                 </div>
                 @endif
+                <h6 class="font-bold text-gray-700">성별</h6>
+                <div>
+                    <p class=" mx-1 font-medium text-gray-700">{{ $post->gender == "N" ? "무관" : ($post->gender == "M" ? "남자" : "여자") }}</p>
+                </div>
                 <h6 class="font-bold text-gray-700">포지션</h6>
                 <div class="flex gap-3 flex-wrap">
                     @foreach($post->positions as $post->position)
@@ -45,7 +49,18 @@
             <div class="w-[80%]">
                 <img class="rounded" alt="post_image" src={{$post->image}}  />
             </div>
-            <div id="editorReadOnly" class="mt-3 border-t pt-10 w-[90%]" data="{!! $post->content !!}"></div>
+            <div id="editorReadOnly" class="mt-3 border-y pt-7 w-[90%]" data="{!! $post->content !!}"></div>
+            <div class="w-[90%] my-3 border-b pb-3">
+                <form method="post" action={{route('comment.store', ['post' => $post->id])}}>
+                    @csrf
+                    <x-input-label for="comment" value="{{ __('COMMENT') }}" class="text-xl mb-1.5"></x-input-label>
+                    <x-text-input id="comment" name="comment"  :value="old('comment') ?? ''" class="w-full h-24"></x-text-input>
+                    <x-primary-button class="float-right mt-3">작성</x-primary-button>
+                </form>
+            </div>
+            @foreach($comments as $comment)
+                <x-comment-box :comment="$comment" :post_id="$post->id"></x-comment-box>
+            @endforeach
         </div>
     </div>
 </x-app-layout>

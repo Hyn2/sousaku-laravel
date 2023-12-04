@@ -83,7 +83,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post-detail', ['post' => $post]);
+        return view('post-detail', ['post' => $post, 'comments' => $post->comments]);
     }
 
     /**
