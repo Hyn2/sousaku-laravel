@@ -34,8 +34,7 @@ class PostController extends Controller
         if(!empty($request->region)) {
             $posts = $posts->where('region_id', $request->region);
         }
-
-        return view('post-board', ['posts' => $posts, 'positions' => $positions(), 'regions' => $regions()]);
+        return view('post-board', ['posts' => $posts, 'positions' => $positions(), 'regions' => $regions(), 'query' => $request->query()]);
     }
 
     /**
