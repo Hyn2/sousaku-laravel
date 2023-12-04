@@ -2,10 +2,10 @@
     <div class="flex mt-10 w-full justify-center">
         <div class="my-1">
             {{--searchForm--}}
-            <form id="searchForm" method="get" action="/post">
+            <form id="searchForm" method="get" action={{route('post.index')}}>
                 <div class="flex justify-evenly">
                     <x-input-label class="w-3/12 text-center" for="gender" value="GENDER" />
-                    <x-input-label class="w-3/12 text-center" for="region" value="REGION"/>
+                    <x-input-label class="w-3/12 text-center" for="region" value="REGION" />
                 </div>
                 <div class="flex justify-evenly">
                     <x-select id="gender" name="gender">
@@ -37,7 +37,7 @@
                 </div>
             </form>
             {{--resetForm--}}
-            <form id="resetForm" action="/post">
+            <form id="resetForm" action={{route('post.index')}}>
             </form>
         </div>
     </div>

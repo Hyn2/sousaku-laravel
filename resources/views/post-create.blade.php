@@ -2,7 +2,7 @@
 <x-app-layout>
     <div class="flex justify-center mt-10">
         <div class="flex basis-3/5 flex-col p-1">
-            <form id="postForm" action="/post" method="post" enctype="multipart/form-data">
+            <form id="postForm" method="post" enctype="multipart/form-data" action={{route('post.store')}}>
                 @csrf
                 <div class="flex justify-end">
                     <x-primary-button id="formSubmit">작성</x-primary-button>

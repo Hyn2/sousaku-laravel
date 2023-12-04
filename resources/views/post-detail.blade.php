@@ -10,10 +10,10 @@
                         $userID = auth()->user();
                         @endphp
                         @if(($userID->id ?? false) == $post->user_id)
-                        <form class="mb-0" action="/post/{{$post->id}}/edit" method="GET">
+                        <form class="mb-0" method="GET" action={{route('post.edit', ['post' =>$post->id])}}>
                             <x-primary-button id="editPost">수정</x-primary-button>
                         </form>
-                        <form class="mb-0" action="/post/{{$post->id}}" method="POST">
+                        <form class="mb-0" method="POST" action={{route('post.destroy', ['post'=>$post->id])}}>
                             @method("DELETE")
                             @csrf
                             <x-primary-button id="deletePost" onclick="confirm('삭제할거에요?')">삭제</x-primary-button>
