@@ -75,7 +75,7 @@ class PostController extends Controller
             $post->positions()->attach($position);
         }
 
-        return redirect('/');
+        return redirect('/post/'.$post->id);
     }
 
     /**
