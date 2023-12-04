@@ -41,19 +41,24 @@ class RegisteredUserController extends Controller
             'region_id' => ['required', 'numeric'],
             'gender' => ['required', 'string', 'size:1'],
             'positions'=> ['required', 'array'],
-            'contact' => ['required', 'string'],
-            'bio' => ['required', 'string'],
+            'bio' => ['string','nullable'],
+            'email_visibility' => ['boolean'],
         ]);
 
-        $user = User::create([
+        $dataToRegister =[
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'region_id' => $request->region_id,
             'gender' => $request->gender,
-            'contact' => $request->contact,
-            'bio' => $request->bio,
-        ]);
+            'email_visibility' => $request->has('email_visibility') && $request->email_visibility = true,
+        ];
+
+        if($request->exists('bio')) {
+            $dataToRegister['bio'] = $request->bio;
+        }
+
+        $user = User::create($dataToRegister);
 
         $positions = $request->positions;
         foreach ($positions as $position) {

@@ -21,8 +21,7 @@ class ProfileUpdateRequest extends FormRequest
             'positions' =>['array'],
             'gender' =>['string', 'size:1'],
             'region_id' => ['numeric'],
-            'bio' => ['string'],
-            'contact' => ['string'],
+            'bio' => ['string', 'nullable'],
         ];
     }
 }

@@ -49,17 +49,10 @@
             @endif
         </div>
 
-        {{--연락--}}
-        <div>
-            <x-input-label for="contact" :value="__('연락')" />
-            <x-text-input id="contact" name="contact" type="text" class="mt-1 block w-full" :value="old('contact', $user->contact)" required />
-            <x-input-error class="mt-2" :messages="$errors->get('contact')" />
-        </div>
-
         {{--소개--}}
         <div>
             <x-input-label for="bio" :value="__('소개')" />
-            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full" :value="old('bio', $user->bio)" required />
+            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full" :value="old('bio', $user->bio)" />
             <x-input-error class="mt-2" :messages="$errors->get('bio')" />
         </div>
 

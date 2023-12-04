@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->boolean('email_visibility');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->char('gender', 1)->nullable();
+            $table->char('gender', 1);
             // 추후에 리전 추가
-            $table->string('contact')->nullable();
-            $table->string('profile_image')->default(' ');
             $table->string('bio', 50)->nullable();
             $table->rememberToken();
             $table->timestamps();

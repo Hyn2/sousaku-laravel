@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('content');
             $table->string('image');
             $table->char('gender',1);
-            $table->string('contact');
             $table->foreignId('region_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

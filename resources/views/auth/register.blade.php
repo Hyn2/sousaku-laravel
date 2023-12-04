@@ -10,17 +10,10 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- contact -->
-        <div class="mt-4">
-            <x-input-label for="contact" :value="__('Contact')" />
-            <x-text-input id="contact" class="block mt-1 w-full" type="text" name="contact" :value="old('contact')" required />
-            <x-input-error :messages="$errors->get('contact')" class="mt-2" />
-        </div>
-
         <!-- bio -->
         <div class="mt-4">
             <x-input-label for="bio" :value="__('Bio')" />
-            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" required />
+            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" />
             <x-input-error :messages="$errors->get('bio')" class="mt-2" />
         </div>
 
@@ -87,6 +80,15 @@
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <input class="mr-0.5" type="checkbox" name="email_visibility" value="1" />
+            <p class="inline-flex">
+                이메일 공개 여부
+            </p>
+            <p class="inline-flex font-thin text-xs text-gray-500">선택시 모든 게시물에 이메일이 표시됩니다.</p>
+            <x-input-error :messages="$errors->get('email_visibility')" class="mt-2" ></x-input-error>
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -8,15 +8,11 @@
                     <x-primary-button id="formSubmit">작성</x-primary-button>
                 </div>
                 <div class="my-1">
-                    <x-input-label for="title" value="TITLE"/>
+                    <x-input-label class="w-fit" for="title" value="TITLE"/>
                     <x-text-input class="@error('title') is-invalid @enderror w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
                     @error('title')
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
-                </div>
-                <div class="my-1">
-                    <x-input-label for="contact" value="CONTACT"/>
-                    <x-text-input class="w-full my-1" id="contact" name="contact" type="text" placeholder="CONTACT"/>
                 </div>
                 <div class="my-1">
                     <div class="flex justify-evenly">
@@ -55,6 +51,7 @@
                     <div class="w-1/12 max-h-full overflow-hidden mr-1">
                         <img id="preImg" class="max-h-full max-w-full">
                     </div>
+
                 </div>
                 <x-quill></x-quill>
                 <x-text-input hidden type="text" id="htmlContent" name="htmlContent"/>

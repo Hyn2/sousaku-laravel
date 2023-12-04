@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-
+    
     protected $fillable =
     [
         'title',
@@ -16,7 +16,6 @@ class Post extends Model
         'gender',
         'region_id',
         'user_id',
-        'contact',
         'image',
     ];
     public function region() {

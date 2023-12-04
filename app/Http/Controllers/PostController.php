@@ -27,7 +27,7 @@ class PostController extends Controller
                 $query->whereIn('position_id', $positionIds);
             })->get();
         } else {
-            $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
+            $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->paginate(3);
         }
         if(!empty($request->gender)) {
             $posts = $posts->where('gender', $request->gender);
@@ -57,7 +57,6 @@ class PostController extends Controller
             $request->validate([
                 'title' => 'required|string',
                 'gender' => 'required|string|max:1',
-                'contact' => 'required|string',
                 'htmlContent' => 'required|string',
                 'image' => 'required|file',
                 'positions' => 'required|array',
@@ -73,7 +72,6 @@ class PostController extends Controller
             'gender' => $request->gender,
             'region_id' => $request->region,
             'user_id' => Auth::id(),
-            'contact' => $request->contact,
             'content' => $request->htmlContent,
             'image' => Storage::url($request->image->store()),
         ]);
@@ -115,7 +113,6 @@ class PostController extends Controller
             $request->validate([
                 'title' => 'required|string',
                 'gender' => 'required|string|max:1',
-                'contact' => 'required|string',
                 'htmlContent' => 'required|string',
                 'image' => 'file',
                 'positions' => 'required|array',

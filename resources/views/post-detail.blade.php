@@ -27,10 +27,12 @@
                 </div>
             </div>
             <div class="w-full my-5 p-5 grid gap-2 border items-center h-fit rounded-2xl shadow">
+                @if($post->user->email_visibility)
                 <h6 class="font-bold text-gray-700">연락처</h6>
                 <div>
-                    <p class=" mx-1 font-medium text-gray-700">{{$post->contact}}</p>
+                    <p class=" mx-1 font-medium text-gray-700">{{$post->user->email}}</p>
                 </div>
+                @endif
                 <h6 class="font-bold text-gray-700">포지션</h6>
                 <div class="flex gap-3 flex-wrap">
                     @foreach($post->positions as $post->position)
