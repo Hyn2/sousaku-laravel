@@ -1,9 +1,4 @@
 <x-app-layout>
-{{--    @if(session('response'))--}}
-{{--        <script>--}}
-{{--            alert('{{session('response')}}');--}}
-{{--        </script>--}}
-{{--    @endif--}}
     <div class="flex mt-10 w-full justify-center">
         <div class="my-1">
             {{--searchForm--}}

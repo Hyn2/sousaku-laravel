@@ -49,9 +49,12 @@
                 </div>
                 <x-input-label class="w-3/12" for="image" value="IMAGE" />
                 <div id="imageContainer" class="flex items-center w-auto h-20">
-                    <input id="image" type="file" name="image" />
+                    <label for="image" class="mr-5">
+                        <div class="border px-3 py-2 rounded-2xl hover:scale-105 font-thin">사진 업로드하기</div>
+                    </label>
+                    <input hidden id="image" type="file" name="image" />
                     <div class="w-1/12 max-h-full overflow-hidden mr-1">
-                        <img id="preImg" class="max-h-full max-w-full">
+                        <img id="preImg" class="max-h-full max-w-full" src="{{$post->image}}">
                     </div>
                 </div>
                 <x-quill></x-quill>
