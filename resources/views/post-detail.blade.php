@@ -1,4 +1,4 @@
-@vite('resources/js/quillReader.js');
+@vite('/resources/js/quillReader.js')
 <x-app-layout>
     <div class="flex justify-center">
         <div class="grid basis-3/5 mt-20 place-items-center">
@@ -10,10 +10,10 @@
                         $userID = auth()->user();
                         @endphp
                         @if(($userID->id ?? false) == $post->user_id)
-                        <form action="/post/{{$post->id}}/edit" method="GET">
+                        <form class="mb-0" action="/post/{{$post->id}}/edit" method="GET">
                             <x-primary-button id="editPost">수정</x-primary-button>
                         </form>
-                        <form action="/post/{{$post->id}}" method="POST">
+                        <form class="mb-0" action="/post/{{$post->id}}" method="POST">
                             @method("DELETE")
                             @csrf
                             <x-primary-button id="deletePost" onclick="confirm('삭제할거에요?')">삭제</x-primary-button>
@@ -49,5 +49,6 @@
         </div>
     </div>
 </x-app-layout>
+
 
 

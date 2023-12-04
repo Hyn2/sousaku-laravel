@@ -27,7 +27,7 @@ class PostController extends Controller
                 $query->whereIn('position_id', $positionIds);
             })->get();
         } else {
-            $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->paginate(3);
+            $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
         }
         if(!empty($request->gender)) {
             $posts = $posts->where('gender', $request->gender);
@@ -53,19 +53,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'title' => 'required|string',
-                'gender' => 'required|string|max:1',
-                'htmlContent' => 'required|string',
-                'image' => 'required|file',
-                'positions' => 'required|array',
-            ]);
-        } catch (ValidationException $e) {
-            $errMsg = $e->getMessage();
-            $errCode = $e->status;
-            return response($errMsg, $errCode);
-        }
+        $request->validate([
+            'title' => 'required|string',
+            'gender' => 'required|string|max:1',
+            'htmlContent' => 'required|string',
+            'image' => 'required|file',
+            'positions' => 'required|array',
+        ]);
 
         $post = Post::create([
             'title' => $request->title,
@@ -109,19 +103,13 @@ class PostController extends Controller
     public function update(Request $request, string $id)
     {
         // Validation
-        try {
-            $request->validate([
-                'title' => 'required|string',
-                'gender' => 'required|string|max:1',
-                'htmlContent' => 'required|string',
-                'image' => 'file',
-                'positions' => 'required|array',
-            ]);
-        } catch (ValidationException $e) {
-            $errMsg = $e->getMessage();
-            $errCode = $e->status;
-            return response($errMsg, $errCode);
-        }
+        $request->validate([
+            'title' => 'required|string',
+            'gender' => 'required|string|max:1',
+            'htmlContent' => 'required|string',
+            'image' => 'file',
+            'positions' => 'required|array',
+        ]);
 
         // Model
         try {

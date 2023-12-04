@@ -9,10 +9,9 @@
                 </div>
                 <div class="my-1">
                     <x-input-label class="w-fit" for="title" value="TITLE"/>
-                    <x-text-input class="@error('title') is-invalid @enderror w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
-                    @error('title')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
+                    <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                    <x-text-input class="w-full my-1" id="title" name="title" type="text" placeholder="TITLE"/>
+
                 </div>
                 <div class="my-1">
                     <div class="flex justify-evenly">
@@ -36,6 +35,7 @@
                         </x-select>
                     </div>
                     <p class="text-sm">POSITION</p>
+                    <x-input-error :messages="$errors->get('positions')" class="mt-2" />
                     <div class="my-5 flex">
                         @foreach($positions as $value)
                             <x-tag class="mx-3 hover:scale-105" :value="$value->id">{{$value->position}}</x-tag>
@@ -43,6 +43,7 @@
                     </div>
                 </div>
                 <x-input-label class="w-3/12" for="image" value="IMAGE" />
+                <x-input-error :messages="$errors->get('image')" class="mt-2" />
                 <div id="imageContainer" class="flex items-center w-auto h-20">
                     <label for="image" class="mr-5">
                         <div class="border px-3 py-2 rounded-2xl hover:scale-105 font-thin">사진 업로드하기</div>
@@ -53,6 +54,8 @@
                     </div>
 
                 </div>
+                <hr />
+                <x-input-error :messages="$errors->get('htmlContent')" class="mt-2" />
                 <x-quill></x-quill>
                 <x-text-input hidden type="text" id="htmlContent" name="htmlContent"/>
             </form>
