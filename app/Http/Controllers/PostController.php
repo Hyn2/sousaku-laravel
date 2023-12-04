@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use function PHPUnit\Framework\isEmpty;
 
 
 class PostController extends Controller
@@ -116,12 +117,12 @@ class PostController extends Controller
                 'gender' => 'required|string|max:1',
                 'contact' => 'required|string',
                 'htmlContent' => 'required|string',
-                'image' => 'required|file',
+                'image' => 'file',
                 'positions' => 'required|array',
             ]);
         } catch (ValidationException $e) {
             $errMsg = $e->getMessage();
-            $errCode = $e->getCode();
+            $errCode = $e->status;
             return response($errMsg, $errCode);
         }
 
@@ -137,14 +138,24 @@ class PostController extends Controller
             $post->positions()->detach($oldPosition->id);
         }
 
-        $post->update([
+        $dataToUpdate = [
             'title' => $request->title,
             'gender' => $request->gender,
             'region_id' => $request->region,
             'contact' => $request->contact,
             'content' => $request->htmlContent,
-            'image' => Storage::url($request->image->store()),
-        ]);
+        ];
+
+        if($request->hasFile('image')) {
+            $oldImagePath = basename($post->image);
+            if(Storage::exists($oldImagePath)) {
+               $deleteImage = Storage::delete($oldImagePath);
+                if(!$deleteImage) return redirect('/post')->with('response' , 'Failed to Delete Image');
+            }
+            $dataToUpdate['image'] = Storage::url($request->image->store());
+        }
+
+        $post->update($dataToUpdate);
 
         $newPositions = $request->positions;
         foreach ($newPositions as $newPosition) {
