@@ -17,14 +17,21 @@
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+                @if(request()->routeIs('register'))
+                    <p class="font-thin text-3xl">회원가입을 통해 멤버를 찾아보세요</p>
+                @elseif(request()->routeIs('login'))
+                    <p class="font-thin text-3xl">로그인해보세용</p>
+                @endif
             </div>
 
+            <a href="/" class="hover:scale-105 hover:text-black text-s font-thin text-right mt-1.5">
+                홈으로 돌아가기
+            </a>
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-gray-50 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
+
+
         </div>
     </body>
 </html>
