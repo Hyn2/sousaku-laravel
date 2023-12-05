@@ -9,7 +9,7 @@
                         @php
                         $userID = auth()->user();
                         @endphp
-                        @if(($userID->id ?? false) == $post->user_id)
+                        @if(($userID->id ?? false) == $post->user_id || auth()->user()->admin)
                         <form class="mb-0" method="GET" action={{route('post.edit', ['post' =>$post->id])}}>
                             <x-primary-button id="editPost">수정</x-primary-button>
                         </form>

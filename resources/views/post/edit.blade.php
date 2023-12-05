@@ -5,7 +5,7 @@
                 @csrf
                 @method('PATCH')
                 <div class="flex justify-end">
-                    <button id="formSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">작성</button>
+                    <button id="formSubmit" class="w-20 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 shadow font-semibold hover:drop-shadow-md">수정</button>
                 </div>
                 <div class="my-1">
                     <x-input-label for="title" value="TITLE"/>

@@ -1,6 +1,3 @@
-@php
-    $user = auth()->user();
-@endphp
 <!DOCTYPE html>
 <html class="lg:text-[100%] min-[532px]:text-[75%] text-[70%]" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

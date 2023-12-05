@@ -32,13 +32,12 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-1">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
                     {{ __('비밀번호를 잊으셨나요?') }}
                 </a>
             @endif
-
             <x-primary-button class="ml-3">
                 {{ __('로그인') }}
             </x-primary-button>

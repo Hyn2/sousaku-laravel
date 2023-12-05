@@ -6,6 +6,7 @@
                 <h1 class="font-thin text-center">이번 주의 음악</h1>
             </div>
         </div>
+        <button class="text-center mt-3 text-gray-300 hover:text-gray-600">Carousel 수정하기</button>
         <div class="flex justify-center w-full h-[800px]">
             <div id="prevDiv" class="flex items-center mr-3">
                 <button id="prev" class="text-5xl"><</button>
