@@ -53,3 +53,11 @@ quill.on('text-change', () => {
 });
 
 
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    console.log('test');
+    const htmlContent = document.querySelector('#htmlContent');
+    if(htmlContent.value) quill.setContents(quill.clipboard.convert(htmlContent.value));
+});
+
+
