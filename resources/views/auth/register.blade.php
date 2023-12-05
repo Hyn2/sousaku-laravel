@@ -5,22 +5,22 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-label for="name" :value="__('이름')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" :placeholder="__('이름을 입력해주세요.')" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- bio -->
         <div class="mt-4">
-            <x-input-label for="bio" :value="__('Bio')" />
-            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" />
+            <x-input-label for="bio" :value="__('소개')" />
+            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" :placeholder="__('소개를 입력해주세요.')" />
             <x-input-error :messages="$errors->get('bio')" class="mt-2" />
         </div>
 
 
         <!-- region -->
         <div class="mt-4">
-            <x-input-label for="region" :value="__('Region')" />
+            <x-input-label for="region" :value="__('지역')" />
             <x-select id="region" class="w-full" name="region_id" :value="old('region')">
                 @foreach($regions as $value)
                     <option value={{$value->id}}>{{$value->region}}</option>
@@ -30,8 +30,8 @@
 
         <!-- gender -->
         <div class="mt-4">
-            <x-input-label for="gender" :value="__('Gender')" />
-            <x-select id="gender" class="w-full" name="gender" :value="old('gender')">
+            <x-input-label for="gender" :value="__('성별')" />
+            <x-select id="gender" class="w-full" name="gender" :value="old('gender')" required>
                     <option value="M">남성</option>
                     <option value="F">여성</option>
             </x-select>
@@ -39,7 +39,7 @@
 
         <!-- position -->
         <div class="mt-4">
-            <x-input-label for="positions" :value="__('Position')" class="mb-1.5" />
+            <x-input-label for="positions" :value="__('포지션')" class="mb-1.5" />
                 @foreach($positions as $position)
                     <x-tag class="mx-0.5 hover:scale-105" :value="$position->id">{{$position->position}}</x-tag>
                 @endforeach
@@ -54,30 +54,31 @@
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-label for="email" :value="__('이메일')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" :placeholder="__('이메일을 입력해주세요.')" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('비밀번호')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            required autocomplete="new-password" />
+                            :placeholder="__('비밀번호')" required />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('비밀번호 확인')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                            name="password_confirmation"
+                            :placeholder="__('비밀번호 확인')" required  />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
