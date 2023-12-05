@@ -15,7 +15,8 @@ class ProfileController extends Controller
     public function show(User $user): View
     {
         $userPositions = $user->positions;
-        return view('profile.main', ['user'=>$user, 'userPositions'=>$userPositions]);
+        $userPosts = $user->posts;
+        return view('profile.main', ['user' => $user, 'userPositions' => $userPositions, 'userPosts' => $userPosts]);
     }
     /**
      * Display the user's profile form.

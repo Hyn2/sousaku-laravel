@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use function PHPUnit\Framework\isEmpty;
@@ -35,7 +36,7 @@ class PostController extends Controller
         if(!empty($request->region)) {
             $posts = $posts->where('region_id', $request->region);
         }
-        return view('post-board', ['posts' => $posts, 'positions' => $positions(), 'regions' => $regions(), 'query' => $request->query()]);
+        return view('post.board', ['posts' => $posts, 'positions' => $positions(), 'regions' => $regions(), 'query' => $request->query()]);
     }
 
     /**
@@ -45,7 +46,7 @@ class PostController extends Controller
     {
         $regions = new RegionController();
         $positions = new PositionController();
-        return view('post-create', ['regions' => $regions(), 'positions' => $positions()]);
+        return view('post.create', ['regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -75,7 +76,7 @@ class PostController extends Controller
             $post->positions()->attach($position);
         }
 
-        return redirect('/post/'.$post->id);
+        return Redirect::route('post.show', ['post' => $post->id]);
     }
 
     /**
@@ -83,7 +84,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post-detail', ['post' => $post, 'comments' => $post->comments]);
+        return view('post.detail', ['post' => $post, 'comments' => $post->comments]);
     }
 
     /**
@@ -94,7 +95,7 @@ class PostController extends Controller
         $regions = new RegionController();
         $positions = new PositionController();
 
-        return view('post-edit', ['post' => $post, 'postPosition' => $post->positions->setVisible(['id']), 'regions' => $regions(), 'positions' => $positions()]);
+        return view('post.edit', ['post' => $post, 'postPosition' => $post->positions->setVisible(['id']), 'regions' => $regions(), 'positions' => $positions()]);
     }
 
     /**
@@ -147,7 +148,7 @@ class PostController extends Controller
             $post->positions()->attach($newPosition);
         }
 
-        return redirect('/post/'.$id);
+        return Redirect::route('post.show' , ['post' => $post->id]);
     }
 
     /**
@@ -158,8 +159,8 @@ class PostController extends Controller
         $filePath = basename($post->image);
         if(Storage::exists($filePath)) {
             $deleteImage = Storage::delete($filePath);
-            if(!$deleteImage) return redirect('/post')->with('response' , 'Failed to Delete Image');
+            if(!$deleteImage) return redirect('/post')->with('response' , '이미지 삭제에 실패하였습니다.');
         }
-        return redirect('/post')->with('response', $post->delete() ? 'Post deleted successfully' : 'Failed to delete post');
+        return redirect('/post')->with('response', $post->delete() ? '게시글이 성공적으로 삭제되었습니다.' : '게시글 삭제에 실패하였습니다.');
     }
 }

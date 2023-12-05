@@ -29,7 +29,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen
                             src={{env('CAROUSEL_IMAGE_PATH_3')}}>
-                    </iframe>>
+                    </iframe>
                 </div>
             </div>
             <div id="nextDiv" class="flex items-center ml-3">
