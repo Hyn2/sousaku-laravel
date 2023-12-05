@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title',50);
             $table->string('content');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->char('gender',1);
             $table->foreignId('region_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
