@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
     {
         $regions = new RegionController();
         $positions = new PositionController();
-        return view('auth.register', ['regions' => $regions(), 'positions' => $positions()]);
+        return view('auth.register', ['regions' => $regions(), 'positions' => $positions()])->with('success', '회원가입이 완료되었습니다.');
     }
 
     /**

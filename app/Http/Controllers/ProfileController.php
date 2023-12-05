@@ -41,24 +41,20 @@ class ProfileController extends Controller
         $request->user()->fill($request->validated());
 
         // 이전 포지션 값
-        $oldPositions = $request->user()->positions;
-        foreach ($oldPositions as $oldPosition) {
-            $request->user()->positions()->detach($oldPosition->id);
-        }
+        $request->user()->positions()->detach();
 
         // 변경하려고 하는 포지션 값
         $positions = $request->positions;
-        foreach($positions as $position) {
-            $request->user()->positions()->attach($position);
-        }
+        $request->user()->positions()->attach($positions);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $updateUser = $request->user()->save();
 
-        return Redirect::route('profile.show', ['user' => $request->user()]);
+        return Redirect::route('profile.show', ['user' => $request->user()])
+            ->with($updateUser ? "success" : "fail", $updateUser ? "프로필이 수정되었습니다." : "프로필 수정에 실패하였습니다.");
     }
 
     /**
@@ -74,11 +70,13 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        $user->delete();
+        $user->positions()->detach();
+        $deleteUser = $user->delete();
+        if(!$deleteUser) return Redirect::to('/')->with('fail', '계정 삭제에 실패하였습니다.');
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')->with('success', '회원 탈퇴가 완료되었습니다.');
     }
 }

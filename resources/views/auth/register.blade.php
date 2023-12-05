@@ -13,7 +13,7 @@
         <!-- bio -->
         <div class="mt-4">
             <x-input-label for="bio" :value="__('소개')" />
-            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" :placeholder="__('소개를 입력해주세요.')" />
+            <x-text-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')" :placeholder="__('소개를 입력해주세요.(선택)')" />
             <x-input-error :messages="$errors->get('bio')" class="mt-2" />
         </div>
 
@@ -84,10 +84,10 @@
         </div>
 
         <div class="mt-4">
-            <input class="mr-0.5" type="checkbox" name="email_visibility" value="1" />
-            <p class="inline-flex">
+            <input id="email_visibility" class="mr-0.5" type="checkbox" name="email_visibility" value="1" />
+            <x-input-label for="email_visibility" class="inline-flex">
                 이메일 공개 여부
-            </p>
+            </x-input-label>
             <p class="inline-flex font-thin text-xs text-gray-500">선택시 모든 게시물에 이메일이 표시됩니다.</p>
             <x-input-error :messages="$errors->get('email_visibility')" class="mt-2" ></x-input-error>
         </div>

@@ -18,6 +18,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
+        @if(session('success'))
+            <script>
+                alert("{{session('success')}}")
+            </script>
+        @elseif(session('fail'))
+            <script>
+                alert("{{session('fail')}}")
+            </script>
+        @endif
     <div class="flex flex-col mt-4 min-h-screen">
         <x-header/>
         <main>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use function PHPUnit\Framework\isEmpty;
 
 
@@ -17,7 +18,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $regions = new RegionController();
         $positions = new PositionController();
@@ -42,7 +43,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $regions = new RegionController();
         $positions = new PositionController();
@@ -72,23 +73,26 @@ class PostController extends Controller
 
         if($request->hasFile('image')) {
             $storeImage = Storage::url($request->image->store());
+
+            if(!$storeImage) return Redirect::route('post.create')->with('fail', '이미지 저장에 실패했습니다.');
+
             $dataToStore['image'] = $storeImage;
         }
 
         $post = Post::create($dataToStore);
+        if(!$post) return Redirect::route('post.create')->with('fail', '게시글 저장에 실패했습니다.');
 
+        // 연관 관계 설정
         $positions = $request->positions;
-        foreach ($positions as $position) {
-            $post->positions()->attach($position);
-        }
+        $post->positions()->attach($positions);
 
-        return Redirect::route('post.show', ['post' => $post->id]);
+        return Redirect::route('post.show', ['post' => $post->id])->with('success', '게시글이 작성되었습니다.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
         return view('post.detail', ['post' => $post, 'comments' => $post->comments]);
     }
@@ -125,10 +129,8 @@ class PostController extends Controller
             return response($e->getMessage(),$e->getCode());
         }
 
-        $oldPositions = $post->positions->setVisible(['id']);
-        foreach ($oldPositions as $oldPosition) {
-            $post->positions()->detach($oldPosition->id);
-        }
+        // 모든 연관 관계 해제
+        $post->positions()->detach();
 
         $dataToUpdate = [
             'title' => $request->title,
@@ -142,19 +144,19 @@ class PostController extends Controller
             $oldImagePath = basename($post->image);
             if(Storage::exists($oldImagePath)) {
                $deleteImage = Storage::delete($oldImagePath);
-                if(!$deleteImage) return redirect('/post')->with('response' , 'Failed to Delete Image');
+                if(!$deleteImage) return Redirect::route('post.index')->with('fail', '기존 이미지 삭제에 실패했습니다.');
             }
             $dataToUpdate['image'] = Storage::url($request->image->store());
         }
 
-        $post->update($dataToUpdate);
+        $updatePost = $post->update($dataToUpdate);
+        if(!$updatePost) return Redirect::route('post.index')->with('fail', '게시글 수정에 실패하였습니다.');
 
+        // 연관 관계 설정
         $newPositions = $request->positions;
-        foreach ($newPositions as $newPosition) {
-            $post->positions()->attach($newPosition);
-        }
+        $post->positions()->attach($newPositions);
 
-        return Redirect::route('post.show' , ['post' => $post->id]);
+        return Redirect::route('post.show' , ['post' => $post->id])->with('success', '게시글이 수정되었습니다.');
     }
 
     /**
@@ -162,11 +164,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $filePath = basename($post->image);
-        if(Storage::exists($filePath)) {
-            $deleteImage = Storage::delete($filePath);
-            if(!$deleteImage) return redirect('/post')->with('response' , '이미지 삭제에 실패하였습니다.');
+        if(!is_null($post->image)) {
+            $filePath = basename($post->image);
+            if(Storage::exists($filePath)) {
+                $deleteImage = Storage::delete($filePath);
+                if(!$deleteImage) return redirect('/post')->with('fail' , '이미지 삭제에 실패하였습니다.');
+            }
         }
-        return redirect('/post')->with('response', $post->delete() ? '게시글이 성공적으로 삭제되었습니다.' : '게시글 삭제에 실패하였습니다.');
+        $deletePost = $post->delete();
+
+        return redirect('/post')->with($deletePost ? 'success' : 'fail', $deletePost ? '게시글이 삭제되었습니다.' : '게시글 삭제에 실패하였습니다.');
     }
 }
