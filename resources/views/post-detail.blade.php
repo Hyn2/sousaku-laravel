@@ -35,7 +35,7 @@
                 @endif
                 <h6 class="font-bold text-gray-700">성별</h6>
                 <div>
-                    <p class=" mx-1 font-medium text-gray-700">{{ $post->gender == "N" ? "무관" : ($post->gender == "M" ? "남자" : "여자") }}</p>
+                    <p class=" mx-1 font-medium text-gray-700">{{ $post->gender == "N" ? "무관" : ($post->gender == "M" ? "남성" : "여성") }}</p>
                 </div>
                 <h6 class="font-bold text-gray-700">포지션</h6>
                 <div class="flex gap-3 flex-wrap">

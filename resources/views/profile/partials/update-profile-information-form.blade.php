@@ -60,8 +60,8 @@
         <div>
             <x-input-label class="w-3/12" for="gender" value="GENDER" />
             <x-select name="gender">
-                <option value="M" @if($user->gender == "M") selected @endif>남자</option>
-                <option value="F" @if($user->gender == "F") selected @endif>여자</option>
+                <option value="M" @if($user->gender == "M") selected @endif>남성</option>
+                <option value="F" @if($user->gender == "F") selected @endif>여성</option>
             </x-select>
         </div>
 

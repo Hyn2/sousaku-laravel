@@ -20,8 +20,8 @@
                     <div class="flex justify-evenly">
                         <x-select name="gender">
                             <option value="N">무관</option>
-                            <option value="M">남자</option>
-                            <option value="F">여자</option>
+                            <option value="M">남성</option>
+                            <option value="F">여성</option>
                         </x-select>
                         <x-select name="region">
                             @foreach($regions as $value)
