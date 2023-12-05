@@ -12,8 +12,8 @@
             <hr class="my-3">
             <div id="positionContainer">
                 <p class="text-xl mb-1">{{__('포지션')}}</p>
-                @foreach($userPositions as $userPosition)
-                    <x-tag disabled>{{$userPosition->position}}</x-tag>
+                @foreach($positions as $position)
+                    <x-tag disabled>{{$position->position}}</x-tag>
                 @endforeach
             </div>
             @if($user->id === Auth::user()->id)

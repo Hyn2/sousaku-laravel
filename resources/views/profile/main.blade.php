@@ -1,4 +1,4 @@
 <x-app-layout>
-    @include('profile.partials.user-info')
+    <x-user-info :user="$user" :positions="$userPositions" />
     <x-post-box :posts="$userPosts" />
 </x-app-layout>
