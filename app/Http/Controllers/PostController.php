@@ -58,18 +58,24 @@ class PostController extends Controller
             'title' => 'required|string',
             'gender' => 'required|string|max:1',
             'htmlContent' => 'required|string',
-            'image' => 'required|file',
+            'image' => 'image',
             'positions' => 'required|array',
         ]);
 
-        $post = Post::create([
+        $dataToStore = [
             'title' => $request->title,
             'gender' => $request->gender,
             'region_id' => $request->region,
             'user_id' => Auth::id(),
             'content' => $request->htmlContent,
-            'image' => Storage::url($request->image->store()),
-        ]);
+        ];
+
+        if($request->hasFile('image')) {
+            $storeImage = Storage::url($request->image->store());
+            $dataToStore['image'] = $storeImage;
+        }
+
+        $post = Post::create($dataToStore);
 
         $positions = $request->positions;
         foreach ($positions as $position) {
@@ -108,7 +114,7 @@ class PostController extends Controller
             'title' => 'required|string',
             'gender' => 'required|string|max:1',
             'htmlContent' => 'required|string',
-            'image' => 'file',
+            'image' => 'image',
             'positions' => 'required|array',
         ]);
 

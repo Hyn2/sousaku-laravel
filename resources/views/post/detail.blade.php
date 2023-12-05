@@ -26,28 +26,27 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full my-5 p-5 grid gap-2 border items-center h-fit rounded-2xl shadow">
+            <div id="optionBox" class="w-full my-5 p-5 grid gap-x-10 gap-y-3 grid-cols-4 justify-around border text-center
+             h-fit rounded-2xl shadow">
                 @if($post->user->email_visibility)
-                <h6 class="font-bold text-gray-700">연락처</h6>
-                <div>
-                    <p class=" mx-1 font-medium text-gray-700">{{$post->user->email}}</p>
-                </div>
+                <h6 class="font-bold text-gray-700 border-b">연락처</h6>
                 @endif
-                <h6 class="font-bold text-gray-700">성별</h6>
-                <div>
-                    <p class=" mx-1 font-medium text-gray-700">{{ $post->gender == "N" ? "무관" : ($post->gender == "M" ? "남성" : "여성") }}</p>
-                </div>
-                <h6 class="font-bold text-gray-700">포지션</h6>
+                <h6 class="font-bold text-gray-700 border-b">성별</h6>
+                <h6 class="font-bold text-gray-700 border-b">포지션</h6>
+                <h6 class="font-bold text-gray-700 border-b">지역</h6>
+
+                @if($post->user->email_visibility)<p class=" mx-1 font-medium text-gray-700">{{$post->user->email}}</p>@endif
+                <p class=" mx-1 font-medium text-gray-700">{{ $post->gender == "N" ? "무관" : ($post->gender == "M" ? "남성" : "여성") }}</p>
                 <div class="flex gap-3 flex-wrap">
                     @foreach($post->positions as $post->position)
                         <x-tag :value="$post->position->position_id">{{$post->position->position}}</x-tag>
                     @endforeach
                 </div>
-                <h6 class="font-bold text-gray-700">지역</h6>
                 <x-tag :value="$post->region->region">{{$post->region->region}}</x-tag>
+
             </div>
             <div class="w-[80%]">
-                <img class="rounded" alt="post_image" src={{$post->image}}  />
+                @if(!is_null($post->image))<img class="rounded" alt="post_image" src={{$post->image}}  />@endif
             </div>
             <div id="editorReadOnly" class="mt-3 border-y pt-7 w-[90%]" data="{!! $post->content !!}"></div>
             <div class="w-[90%] my-3 border-b pb-3">
