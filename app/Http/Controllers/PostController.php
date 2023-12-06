@@ -113,6 +113,7 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
+//        return $request;
         // Validation
         $request->validate([
             'title' => 'required|string',
@@ -129,8 +130,7 @@ class PostController extends Controller
             return response($e->getMessage(),$e->getCode());
         }
 
-        // 모든 연관 관계 해제
-        $post->positions()->detach();
+
 
         $dataToUpdate = [
             'title' => $request->title,
@@ -140,15 +140,25 @@ class PostController extends Controller
             'content' => $request->htmlContent,
         ];
 
+        // 넘어온 요청 image 키에 파일이 있는가
         if($request->hasFile('image')) {
-            $oldImagePath = basename($post->image);
-            if(Storage::exists($oldImagePath)) {
-               $deleteImage = Storage::delete($oldImagePath);
-                if(!$deleteImage) return Redirect::route('post.index')->with('fail', '기존 이미지 삭제에 실패했습니다.');
+            // 기존에 저장된 이미지가 있는가
+            if(!is_null($post->image)) {
+                $oldImagePath = basename($post->image);
+                // 기존에 저장된 이미지 경로가 있고, 해당 경로에 파일이 존재한다면 지운다 >> 기존 이미지 삭제라는 거
+                if(Storage::exists($oldImagePath)) {
+                    $deleteImage = Storage::delete($oldImagePath);
+                    if(!$deleteImage) return Redirect::route('post.index')->with('fail', '기존 이미지 삭제에 실패했습니다.');
+                }
             }
+            // 이미지를 저장하고 경로를 받는다
             $dataToUpdate['image'] = Storage::url($request->image->store());
         }
 
+        // 모든 연관 관계 해제
+        $post->positions()->detach();
+
+        // 업데이트
         $updatePost = $post->update($dataToUpdate);
         if(!$updatePost) return Redirect::route('post.index')->with('fail', '게시글 수정에 실패하였습니다.');
 
