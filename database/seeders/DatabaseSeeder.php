@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PositionSeeder::class,
             RegionSeeder::class,
+            EmbedLinkSeeder::class,
         ]);
     }
 }
