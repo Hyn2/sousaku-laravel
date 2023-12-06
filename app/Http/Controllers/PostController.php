@@ -116,7 +116,7 @@ class PostController extends Controller
 //        return $request;
         // Validation
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|max:30',
             'gender' => 'required|string|max:1',
             'htmlContent' => 'required|string',
             'image' => 'image',
@@ -129,8 +129,6 @@ class PostController extends Controller
         } catch(ModelNotFoundException $e) {
             return response($e->getMessage(),$e->getCode());
         }
-
-
 
         $dataToUpdate = [
             'title' => $request->title,

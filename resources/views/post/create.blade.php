@@ -12,7 +12,7 @@
                             <x-input-label class="w-fit mr-3" for="title" :value="__('제목')" />
                             <x-input-error :messages="$errors->get('title')" />
                         </div>
-                        <x-text-input class="w-full my-1" id="title" name="title" :value="old('title', '')" type="text" placeholder="TITLE" maxlength="50"/>
+                        <x-text-input class="w-full my-1" id="title" name="title" :value="old('title', '')" type="text" placeholder="TITLE" maxlength="30"/>
                     </div>
                 <div class="my-1">
                     <div class="flex justify-evenly">

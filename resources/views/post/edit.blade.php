@@ -10,7 +10,7 @@
                 <div class="my-1">
                     <x-input-label for="title" value="TITLE"/>
                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                    <x-text-input class="w-full my-1" :value="old('title', $post->title)" id="title" name="title" type="text" placeholder="TITLE" maxlength="50" />
+                    <x-text-input class="w-full my-1" :value="old('title', $post->title)" id="title" name="title" type="text" placeholder="TITLE" maxlength="30" />
                 </div>
                 <div class="my-1">
                     <div class="flex justify-evenly">
