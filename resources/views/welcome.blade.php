@@ -6,7 +6,7 @@
                 <h1 class="font-thin text-center">이번 주의 음악</h1>
             </div>
         </div>
-        @if(auth()->user()->admin)
+        @if(auth()->user()->admin ?? false)
             <button class="text-center mt-3 text-gray-300 hover:text-gray-600">Carousel 수정하기</button>
         @endif
         <div class="flex justify-center w-full h-[800px]">
