@@ -7,7 +7,7 @@
             <x-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">멤버 구하기</x-nav-link>
         </div>
         <div class="mx-5">
-            <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">공고 게시판</x-nav-link>
+            <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">전체 공고</x-nav-link>
         </div>
     </div>
     <div class="flex items-center justify-center basis-2/12 text-center pt-1 flex-col min-[738px]:flex-row">

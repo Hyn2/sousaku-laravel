@@ -1,7 +1,7 @@
 <a class="text-left" href="{{route("post.show", ['post' => $post->id])}}">
     <div class="p-1 flex w-full lg:h-[325px] min-[532px]:h-[250px] h-[240px] bg-white border rounded-2xl shadow flex-col hover:bg-gray-50">
         <div class="m-3 h-3/6">
-            <img alt="postImage" class="object-none object-center w-full h-full" src={{$post->image ?? env('CARD_DEFAULT_IMAGE_PATH')}}>
+            <img alt="postImage" class="object-center w-full h-full" src={{$post->image}}>
         </div>
         <div class="mx-3 h-3/6">
             <div class=" mx-1 flex justify-between">

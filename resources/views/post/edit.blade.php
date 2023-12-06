@@ -46,7 +46,7 @@
                 </div>
                 <x-input-label class="w-3/12" for="image" value="IMAGE" />
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                <div id="imageContainer" class="flex items-center w-auto h-20">
+                <div id="imageContainer" class="flex items-center w-auto h-16 mb-3">
                     <label for="image" class="mr-5">
                         <div class="border px-3 py-2 rounded-2xl hover:scale-105 font-thin">사진 업로드하기</div>
                     </label>
