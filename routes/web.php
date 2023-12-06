@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EmbedLinkController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $posts = Post::latest()->limit(6)->get();
+    $embedLink = \App\Models\EmbedLink::first();
+    return view('welcome', ['posts' => $posts, 'embedLink' => $embedLink]);
 });
 
 Route::middleware('auth')->group(function () {
@@ -28,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('post', PostController::class)->except('index', 'show');
     Route::post('/post/{post}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::delete('/post/{post}/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+    Route::patch('/embedlink', [EmbedLinkController::class, 'update'])->name('embedlink.update');
 });
 
 Route::resource('post', PostController::class)->only('index', 'show');

@@ -1,42 +1,32 @@
-@vite(['resources/js/carousel.js'])
+
 <x-app-layout>
-    <div class="flex flex-col items-center">
-        <div class="flex justify-center">
-            <div class="mt-20 pb-4 border-b w-full">
-                <h1 class="font-thin text-center">이번 주의 음악</h1>
-            </div>
+    <div class="flex flex-col items-center my-20 gap-32">
+        <div id="recentPost" class="grid gap-3 w-[80%]">
+            <h1 class="text-3xl font-thin text-center pb-4 border-b w-full">
+                최근 공고
+            </h1>
+            <x-post-box :posts="$posts"></x-post-box>
         </div>
-        @if(auth()->user()->admin ?? false)
-            <button class="text-center mt-3 text-gray-300 hover:text-gray-600">Carousel 수정하기</button>
-        @endif
-        <div class="flex justify-center w-full h-fit">
-            <div id="prevDiv" class="flex items-center mr-3">
-                <button id="prev" class="text-5xl h-full"><</button>
+        <div id="weeklyMusic" class="grid gap-3 w-[80%]">
+            <h2 class="text-3xl font-thin text-center pb-4 border-b w-full">이번 주의 음악</h2>
+            @if(auth()->user()->admin ?? false)
+                <x-input-label class="text-center mt-3" for="link">영상 변경하기</x-input-label>
+            <div class="flex justify-center">
+                <form method="POST" action={{route('embedlink.update')}}>
+                    @csrf
+                    @method('PATCH')
+                    <x-text-input id="link" name="link" :value="$embedLink->link"></x-text-input>
+                    <x-primary-button>변경</x-primary-button>
+                </form>
             </div>
-            <div id="carousel" class="mt-10 basis-2/3 overflow-hidden">
-                <div id="container" class="w-full pb-[56.25%] relative flex pb-10">
-                    <iframe class="absolute w-full h-full"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            src={{env('CAROUSEL_IMAGE_PATH_1')}}>
-                    </iframe>
-                    <iframe class="h-auto min-w-full"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            src={{env('CAROUSEL_IMAGE_PATH_2')}}>
-                    </iframe>
-                    <iframe class="h-auto min-w-full"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            src={{env('CAROUSEL_IMAGE_PATH_3')}}>
-                    </iframe>
-                </div>
-            </div>
-            <div id="nextDiv" class="flex items-center ml-3">
-                <button id="next" class="text-5xl h-full">></button>
+            @endif
+            <div class="mt-10 relative pb-[56.25%]">
+                <iframe class="w-full absolute h-full"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        src={{$embedLink->link}}>
+                </iframe>
             </div>
         </div>
     </div>
