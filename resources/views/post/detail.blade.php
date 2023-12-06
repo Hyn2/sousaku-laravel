@@ -26,25 +26,29 @@
                     </div>
                 </div>
             </div>
-            <div id="optionBox" class="w-full my-5 p-5 grid gap-x-10 gap-y-3 grid-cols-4 justify-around border text-center
+            <div id="optionBox" class="w-full my-5 p-5 flex flex-col gap-x-10 gap-y-3 justify-around border
              h-fit rounded-2xl shadow">
                 <h6 class="font-bold text-gray-700 border-b">연락처</h6>
+                @if($post->user->email_visibility)
+                    <p class=" mx-1 font-medium text-gray-700">{{$post->user->email}}</p>
+                @else
+                    <p class="mx-1 font-medium text-gray-700">비공개</p>
+                @endif
                 <h6 class="font-bold text-gray-700 border-b">성별</h6>
+                <p class=" mx-1 font-medium text-gray-700">
+                    {{ $post->gender == "N" ? "무관" :
+                    ($post->gender == "M" ? "남성" : "여성") }}
+                </p>
                 <h6 class="font-bold text-gray-700 border-b">포지션</h6>
-                <h6 class="font-bold text-gray-700 border-b">지역</h6>
-
-                @if($post->user->email_visibility)<p class=" mx-1 font-medium text-gray-700">{{$post->user->email}}</p>@else <p class="mx-1 font-medium text-gray-700">비공개</p>@endif
-                <p class=" mx-1 font-medium text-gray-700">{{ $post->gender == "N" ? "무관" : ($post->gender == "M" ? "남성" : "여성") }}</p>
-                <div class="flex justify-center gap-3 flex-wrap">
+                <div class="flex gap-3 flex-wrap">
                     @foreach($post->positions as $post->position)
                         <x-tag :value="$post->position->position_id">{{$post->position->position}}</x-tag>
                     @endforeach
                 </div>
-                <div class="flex justify-center">
+                <h6 class="font-bold text-gray-700 border-b">지역</h6>
+                <div class="flex">
                     <x-tag :value="$post->region->region" disabled="true">{{$post->region->region}}</x-tag>
                 </div>
-
-
             </div>
             <div class="w-[80%]">
                 @if(!is_null($post->image))<img class="rounded" alt="post_image" src={{$post->image}}  />@endif
@@ -54,7 +58,7 @@
                 <form method="post" action={{route('comment.store', ['post' => $post->id])}}>
                     @csrf
                     <x-input-label for="comment" value="{{ __('댓글') }}" class="text-xl mb-1.5"></x-input-label>
-                    <x-text-input id="comment" name="comment"  :value="old('comment') ?? ''" class="w-full h-24" placeholder="{{__('여기 댓글을 작성하세요')}}" ></x-text-input>
+                    <x-text-input id="comment" name="comment"  :value="old('comment') ?? ''" class="w-full h-24" placeholder="{{__('여기 댓글을 작성하세요(최대 30자)')}}" maxlength="30"></x-text-input>
                     <x-primary-button class="float-right mt-3">작성</x-primary-button>
                 </form>
             </div>
