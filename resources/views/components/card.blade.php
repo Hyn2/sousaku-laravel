@@ -1,7 +1,11 @@
 <a class="text-left" href="{{route("post.show", ['post' => $post->id])}}">
-    <div class="p-1 flex w-full lg:h-[325px] min-[532px]:h-[250px] h-[240px] bg-white border rounded-2xl shadow flex-col hover:bg-gray-50">
-        <div class="m-3 h-3/6">
+    <div class="p-1 w-full lg:h-[325px] min-[532px]:h-[250px] h-[240px] bg-white border rounded-2xl shadow hover:bg-gray-50">
+        <div class="m-3 h-3/6 shadow-sm">
+            @if(is_null($post->image))
+                <div class="w-full h-full flex justify-center items-center font-thin text-xl">이미지가 없어요</div>
+            @else
             <img alt="postImage" class="object-center w-full h-full" src={{$post->image}}>
+            @endif
         </div>
         <div class="mx-3 h-3/6">
             <div class=" mx-1 flex justify-between">
