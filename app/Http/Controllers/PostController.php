@@ -32,7 +32,7 @@ class PostController extends Controller
             $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
         }
         if(!empty($request->gender)) {
-            $posts = $posts->where('gender', $request->gender);
+            $posts = $posts->whereIn('gender', [$request->gender, 'N']);
         }
         if(!empty($request->region)) {
             $posts = $posts->where('region_id', $request->region);

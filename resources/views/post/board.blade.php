@@ -10,7 +10,7 @@
                 <div class="flex justify-evenly">
                     <x-select id="gender" name="gender">
                         <option disabled selected>선택</option>
-                        <option value="N"{{($query['gender'] ?? false) == 'N' ? 'selected' : ''}}>무관</option>
+{{--                        <option value="N"{{($query['gender'] ?? false) == 'N' ? 'selected' : ''}}>무관</option>--}}
                         <option value="M"{{($query['gender'] ?? false) == 'M' ? 'selected' : ''}}>남성</option>
                         <option value="F"{{($query['gender'] ?? false) == 'F' ? 'selected' : ''}}>여성</option>
                     </x-select>
