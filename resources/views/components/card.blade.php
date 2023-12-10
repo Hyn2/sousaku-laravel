@@ -4,7 +4,7 @@
             @if(is_null($post->image))
                 <div class="w-full h-full flex justify-center items-center font-thin text-xl">이미지가 없어요</div>
             @else
-            <img alt="postImage" class="object-center w-full h-full" src={{$post->image}}>
+            <img alt="postImage" class="object-contain w-full h-full" src={{$post->image}}>
             @endif
         </div>
         <div class="mx-3 h-3/6">
