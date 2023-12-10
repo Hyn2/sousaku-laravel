@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EmbedLinkController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\EmbedLink;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $posts = Post::latest()->limit(6)->get();
-    $embedLink = \App\Models\EmbedLink::first();
+    $embedLink = EmbedLink::first();
     return view('welcome', ['posts' => $posts, 'embedLink' => $embedLink]);
 });
 

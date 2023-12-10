@@ -59,10 +59,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Position::class);
     }
 
-    public function genres() {
-        return $this->belongsToMany(Genre::class);
-    }
-
     public function posts() {
         return $this->hasMany(Post::class);
     }

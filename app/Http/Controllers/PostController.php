@@ -26,8 +26,8 @@ class PostController extends Controller
         if(!empty($request->positions)) {
             $positionIds = $request->positions;
             $posts = Post::whereHas('positions', function ($query) use ($positionIds) {
-                $query->whereIn('position_id', $positionIds);
-            })->get();
+                $query->whereIn('positions.id', $positionIds);
+            })->latest()->get();
         } else {
             $posts = Post::with(['region:id,region', 'positions:position', 'user:id,name'])->latest()->get();
         }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    
+
     protected $fillable =
     [
         'title',
@@ -24,10 +24,6 @@ class Post extends Model
 
     public function positions() {
         return $this->belongsToMany(Position::class);
-    }
-
-    public function genres() {
-        return $this->belongsToMany(Genre::class);
     }
 
     public function user() {
