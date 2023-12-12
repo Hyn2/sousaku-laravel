@@ -1,6 +1,6 @@
 <div id="header" class="flex justify-center">
     <div class="flex basis-2/12 text-center items-center">
-        <a class="relative w-[76.5%] pb-[22%] min-[532px]:w-[59%] min-[532px]:pb-[17%]" href="/"><img id="logo" class="absolute w-full h-full" src="/storage/LOGO_NEW.jpg" alt="logo"></a>
+        <a class="relative w-[76.5%] pb-[22%] min-[532px]:w-[59%] min-[532px]:pb-[17%]" href="/"><img id="logo" class="absolute w-full h-full" alt="logo" src={{env('HEADER_IMAGE')}} ></a>
     </div>
     <div class="flex basis-7/12 pt-2 justify-center items-center min-[532px]:justify-start">
         <div class="mx-5">

@@ -72,7 +72,8 @@ class PostController extends Controller
         ];
 
         if($request->hasFile('image')) {
-            $storeImage = Storage::url($request->image->store());
+            $save = Storage::put('/', $request->image);
+            $storeImage = Storage::url($save);
 
             if(!$storeImage) return Redirect::route('post.create')->with('fail', '이미지 저장에 실패했습니다.');
 
