@@ -1,4 +1,3 @@
-@vite('/resources/js/quillReader.js')
 <x-app-layout>
     <div class="flex justify-center">
         <div class="grid basis-3/5 mt-20 place-items-center">
