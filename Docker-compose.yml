@@ -3,17 +3,14 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-    build:
-      context: .
-      dockerfile: ./Dockerfile.nginx
+    image: v0v0v/sousaku-nginx:latest
     ports:
       - "80:8080"
 
   php:
     container_name: php
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    env_file:
-      - .env
+    image: v0v0v/sousaku-laravel:latest
+    environment:
+      HEADER_IMAGE : https://sousaku-s3-bucket.s3.ap-northeast-2.amazonaws.com/LOGO_NEW.jpg
+
 
