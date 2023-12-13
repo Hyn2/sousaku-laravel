@@ -7,5 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+<h2>도커로 실행하기</h2>
+</hr>
+<strong>도커가 설치된 환경이라고 가정합니다.</strong>
 
 
+
+
+1. Repository의 `docker-compose.yml`을 로컬에 복사
+2. 터미널에서 `docker compose up` 실행 
+3. http://localhost:80 으로 접속
