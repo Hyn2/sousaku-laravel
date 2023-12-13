@@ -45,27 +45,5 @@
     <x-post-box :posts="$posts" />
 </x-app-layout>
 
-<script>
-    const regions = document.querySelector('#region');
-    const genders = document.querySelector('#gender');
-    const positions = document.querySelectorAll('#tag');
 
-    regions.addEventListener('change', ()=>{
-        axios.get('http://localhost:8000')
-            .then((res) => {
-                console.log(res)
-            })
-    });
-
-    genders.addEventListener('change', ()=>{
-        console.log('g')
-    });
-
-    positions.forEach((position)=>{
-        position.addEventListener('click', ()=>{
-            console.log('p')
-        });
-    })
-
-</script>
 
