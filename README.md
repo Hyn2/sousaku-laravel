@@ -7,30 +7,5 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## 로컬에서 실행하기
-
-1. 레포지토리 클론
-```shell
-git clone https://github.com/Hyn2/sousaku-laravel.git
-```
-
-2.  `.env.example` 파일명을 `.env`로 변경
-
-
-3. `.env`를 열어 `DB_PASSWORD` 입력
-
-
-4. 명령어 실행
-```
-composer install && npm install
-php artisan key:generate
-php artisan storage:link
-php artisan migrate --seed
-php artisan serve
-npm run dev
-```
-
-5. http://localhost:8000 으로 접속
-
 
 
