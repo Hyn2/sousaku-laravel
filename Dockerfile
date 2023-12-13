@@ -38,5 +38,11 @@ RUN npm run build
 
 RUN php artisan config:cache
 
+RUN php artisan route:cache
+
+RUN php artisan view:cache
+
+RUN rm -rf .env
+
 ### run php-fpm
 CMD ["php-fpm"]
