@@ -6,11 +6,18 @@ services:
     image: v0v0v/sousaku-nginx:latest
     ports:
       - "80:8080"
+    volumes:
+      - shared_volume:/app
 
   php:
     container_name: php
     image: v0v0v/sousaku-laravel:latest
     environment:
       HEADER_IMAGE : https://sousaku-s3-bucket.s3.ap-northeast-2.amazonaws.com/LOGO_NEW.jpg
+    volumes:
+      - shared_volume:/var/www/html
+
+volumes:
+  shared_volume:
 
 
